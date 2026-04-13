@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://dtpbjla8800en"]
+
+[ext_resource type="Texture2D" uid="uid://c7yj6rkmimo43" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button.png" id="1_0t5xj"]
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="1_b6cqo"]
+[ext_resource type="Texture2D" uid="uid://cbr2beue13up8" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button-HOVER.png" id="1_lquar"]
+[ext_resource type="FontFile" uid="uid://tknjeoo6ng5k" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBold.ttf" id="2_8jknd"]
+[ext_resource type="Script" uid="uid://cgvnbh07tqp4f" path="res://SCRIPT/button.gd" id="2_40xib"]
+[ext_resource type="Texture2D" uid="uid://fx2d7d0g1k7g" path="res://ASSETS/UI/Sliced Images/- Resources/swords.png" id="7_8jknd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gs7x4"]
+texture = ExtResource("1_lquar")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lquar"]
+texture = ExtResource("1_lquar")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6cqo"]
+texture = ExtResource("1_lquar")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_57084"]
+texture = ExtResource("1_lquar")
+
+[node name="Node" type="Node" unique_id=336954405]
+
+[node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("1_b6cqo")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1418009981]
+
+[node name="LOGO" type="TextureRect" parent="CanvasLayer" unique_id=891267432]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -116.0
+offset_right = 120.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_8jknd")
+
+[node name="TITLE" type="Label" parent="CanvasLayer" unique_id=1298975644]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -215.0
+offset_right = 399.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1.0323724, 0.9451513, 0.8457181, 1)
+theme_override_fonts/font = ExtResource("2_8jknd")
+theme_override_font_sizes/font_size = 64
+text = "KILL-FARM-UPGRADE"
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=144294634]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -167.0
+offset_right = 181.44922
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/hover = SubResource("StyleBoxTexture_gs7x4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_lquar")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_b6cqo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_57084")
+icon = ExtResource("1_0t5xj")
+flat = true
+expand_icon = true
+script = ExtResource("2_40xib")
+
+[node name="Label" type="Label" parent="CanvasLayer/Button" unique_id=1518718785]
+self_modulate = Color(1, 1, 1, 0.8627451)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.72461
+offset_top = -105.0
+offset_right = 80.27539
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1.1398474, 1.1398474, 1.1398474, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8jknd")
+theme_override_font_sizes/font_size = 44
+text = "GO!"
+horizontal_alignment = 1
+
+[connection signal="button_down" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_button_up"]

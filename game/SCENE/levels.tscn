@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://pgsgpotvr3d3"]
+
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="1_5oq38"]
+[ext_resource type="Texture2D" uid="uid://cbr2beue13up8" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button-HOVER.png" id="2_c0q3f"]
+[ext_resource type="Texture2D" uid="uid://c7yj6rkmimo43" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button.png" id="3_40ycc"]
+[ext_resource type="Script" uid="uid://cgvnbh07tqp4f" path="res://SCRIPT/button.gd" id="4_ksqkb"]
+[ext_resource type="FontFile" uid="uid://tknjeoo6ng5k" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBold.ttf" id="5_55u1c"]
+[ext_resource type="Script" uid="uid://bphj1555ix2ng" path="res://SCRIPT/manager.gd" id="6_40ycc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rvyel"]
+texture = ExtResource("2_c0q3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kagn4"]
+texture = ExtResource("2_c0q3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ttlt1"]
+texture = ExtResource("2_c0q3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2hsbt"]
+texture = ExtResource("2_c0q3f")
+
+[node name="Node" type="Node" unique_id=2105142010]
+
+[node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("1_5oq38")]
+
+[node name="Button" type="Button" parent="." unique_id=1480960117]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.62317
+offset_top = -214.0
+offset_right = 215.62317
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_rvyel")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_kagn4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ttlt1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_2hsbt")
+icon = ExtResource("3_40ycc")
+flat = true
+expand_icon = true
+script = ExtResource("4_ksqkb")
+
+[node name="Label" type="Label" parent="Button" unique_id=1518295981]
+self_modulate = Color(1, 1, 1, 0.8627451)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.82608
+offset_top = -121.0
+offset_right = 146.17395
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1.1398474, 1.1398474, 1.1398474, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_55u1c")
+theme_override_font_sizes/font_size = 44
+text = "SKILL TREE"
+horizontal_alignment = 1
+
+[node name="Button2" type="Button" parent="." unique_id=751838499]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.62317
+offset_top = -38.0
+offset_right = 215.62317
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_rvyel")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_kagn4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ttlt1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_2hsbt")
+icon = ExtResource("3_40ycc")
+flat = true
+expand_icon = true
+script = ExtResource("4_ksqkb")
+
+[node name="Label" type="Label" parent="Button2" unique_id=1349694805]
+self_modulate = Color(1, 1, 1, 0.8627451)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -118.0
+offset_right = 143.00003
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1.1398474, 1.1398474, 1.1398474, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_55u1c")
+theme_override_font_sizes/font_size = 44
+text = "WORLD"
+horizontal_alignment = 1
+
+[node name="Button3" type="Button" parent="." unique_id=1082864425]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.62317
+offset_top = 138.0
+offset_right = 215.62317
+offset_bottom = 311.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_rvyel")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_kagn4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ttlt1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_2hsbt")
+icon = ExtResource("3_40ycc")
+flat = true
+expand_icon = true
+script = ExtResource("4_ksqkb")
+
+[node name="Label" type="Label" parent="Button3" unique_id=171414886]
+self_modulate = Color(1, 1, 1, 0.8627451)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.82608
+offset_top = -120.0
+offset_right = 146.17395
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1.1398474, 1.1398474, 1.1398474, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_55u1c")
+theme_override_font_sizes/font_size = 44
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="MANAGER" type="Node" parent="." unique_id=409586217]
+script = ExtResource("6_40ycc")
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="button_up" from="Button" to="Button" method="_on_button_up"]
+[connection signal="pressed" from="Button" to="MANAGER" method="_on_button_pressed"]
+[connection signal="button_down" from="Button2" to="Button2" method="_on_button_down"]
+[connection signal="button_up" from="Button2" to="Button2" method="_on_button_up"]
+[connection signal="pressed" from="Button2" to="MANAGER" method="_on_button_2_pressed"]
+[connection signal="button_down" from="Button3" to="Button3" method="_on_button_down"]
+[connection signal="button_up" from="Button3" to="Button3" method="_on_button_up"]
+[connection signal="pressed" from="Button3" to="MANAGER" method="_on_button_3_pressed"]

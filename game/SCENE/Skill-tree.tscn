@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://6udr6qctigkw"]
+
+[ext_resource type="Texture2D" uid="uid://o18r3sjwf36v" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full.png" id="1_wxu6u"]
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="2_gmoyd"]
+[ext_resource type="Texture2D" uid="uid://cypwsmo06e800" path="res://ASSETS/UI/Sliced Images/- Resources/coin.png" id="3_3sqrx"]
+[ext_resource type="Script" uid="uid://dvd1hvoxi7ou4" path="res://SCRIPT/skill_tree.gd" id="3_gmoyd"]
+[ext_resource type="FontFile" uid="uid://dud4cwhkrg1sc" path="res://ASSETS/FONT/Tomorrow/Tomorrow-MediumItalic.ttf" id="4_bx6r0"]
+[ext_resource type="Texture2D" uid="uid://c3rf32h46l151" path="res://ASSETS/UI/Sliced Images/- Resources/crystal.png" id="5_eul03"]
+[ext_resource type="Texture2D" uid="uid://ccipd6tecgqn1" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-PUSH.png" id="7_26yp0"]
+[ext_resource type="Texture2D" uid="uid://bfpbculgrxejg" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-HOVER.png" id="7_eul03"]
+[ext_resource type="Texture2D" uid="uid://p116i44oxqrl" path="res://ASSETS/UI/Sliced Images/Part_3/MOBA - Items & Stats/dmg_icon.png" id="8_eul03"]
+[ext_resource type="Texture2D" uid="uid://d3sk8onlgtpi5" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small.png" id="8_oax2y"]
+[ext_resource type="Script" uid="uid://d1iua5pr1wj6l" path="res://SCRIPT/skill.gd" id="10_fh75w"]
+[ext_resource type="Texture2D" uid="uid://bphocvet6u2jx" path="res://ASSETS/UI/Sliced Images/Part_5/Spell Container/action_bar.png" id="12_dvew7"]
+[ext_resource type="FontFile" uid="uid://cylrbhu8kbjr2" path="res://ASSETS/FONT/Tomorrow/Tomorrow-BoldItalic.ttf" id="13_54h8i"]
+[ext_resource type="Texture2D" uid="uid://loyyjkbwyh25" path="res://ASSETS/UI/Sliced Images/Part_5/Talents/talents_arrow_01.png" id="14_c7qt2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh75w"]
+texture = ExtResource("7_26yp0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oax2y"]
+texture = ExtResource("7_eul03")
+
+[node name="SkillTree" type="Node" unique_id=1996030526]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=192542083]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -235.0
+offset_right = 287.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wxu6u")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1965229315]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=184527649]
+position = Vector2(577.12494, 36.50001)
+scale = Vector2(0.49924397, 0.45294106)
+texture = ExtResource("2_gmoyd")
+region_enabled = true
+region_rect = Rect2(12.050476, 2.543518, 2315.429, 170.35736)
+
+[node name="COIN" type="TextureRect" parent="CanvasLayer" unique_id=1455497899]
+offset_left = 32.0
+offset_top = 19.0
+offset_right = 70.0
+offset_bottom = 57.0
+texture = ExtResource("3_3sqrx")
+expand_mode = 1
+
+[node name="COIN" type="Label" parent="CanvasLayer/COIN" unique_id=1737197942]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_top = -11.0
+offset_right = 124.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_bx6r0")
+theme_override_font_sizes/font_size = 20
+text = "COINS: 0"
+
+[node name="CRYSTAL" type="TextureRect" parent="CanvasLayer" unique_id=1463217666]
+offset_left = 189.0
+offset_top = 17.0
+offset_right = 223.0
+offset_bottom = 57.0
+texture = ExtResource("5_eul03")
+expand_mode = 1
+
+[node name="CRYSTAL" type="Label" parent="CanvasLayer/CRYSTAL" unique_id=566655621]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -11.0
+offset_right = 135.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_bx6r0")
+theme_override_font_sizes/font_size = 20
+text = "CRYSTAL: 0"
+
+[node name="SkillTree" type="Control" parent="." unique_id=1891425360]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -222.0
+offset_right = 261.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_gmoyd")
+
+[node name="Contents" type="Control" parent="SkillTree" unique_id=231774365]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="SkillTree/Contents" unique_id=523674012]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.75
+offset_top = -45.75
+offset_right = 45.75
+offset_bottom = 45.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fh75w")
+theme_override_styles/hover = SubResource("StyleBoxTexture_oax2y")
+icon = ExtResource("8_oax2y")
+flat = true
+expand_icon = true
+script = ExtResource("10_fh75w")
+
+[node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button" unique_id=477285050]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -20.0
+offset_right = 18.5
+offset_bottom = 19.03846
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_eul03")
+
+[node name="TextureRect2" type="TextureRect" parent="SkillTree/Contents/Button" unique_id=466998274]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 11.75
+offset_top = -63.0
+offset_right = 163.75
+offset_bottom = -38.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="SkillTree/Contents/Button" unique_id=751916974]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 7.75
+offset_top = -103.0
+offset_right = 327.75
+offset_bottom = 96.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button/Panel" unique_id=76037825]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -1.0
+offset_bottom = 47.0
+grow_horizontal = 2
+texture = ExtResource("12_dvew7")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SkillTree/Contents/Button/Panel/TextureRect" unique_id=736529848]
+self_modulate = Color(1, 1, 1, 0.823)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 9.0
+offset_right = 59.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("13_54h8i")
+text = "ATTACK UPGRADES"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SkillTree/Contents/Button/Panel" unique_id=779704463]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -42.5
+offset_right = 127.0
+offset_bottom = 108.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=1900786091]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "xxxxxx  	                                                   xxxxxx"
+
+[node name="TalentsArrow01" type="Sprite2D" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=1520949825]
+position = Vector2(128, 10)
+scale = Vector2(0.3762679, 0.4732145)
+texture = ExtResource("14_c7qt2")
+
+[connection signal="button_up" from="SkillTree/Contents/Button" to="SkillTree/Contents/Button" method="_on_button_up"]
