@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="2_gmoyd"]
 [ext_resource type="Texture2D" uid="uid://cypwsmo06e800" path="res://ASSETS/UI/Sliced Images/- Resources/coin.png" id="3_3sqrx"]
 [ext_resource type="Script" uid="uid://dvd1hvoxi7ou4" path="res://SCRIPT/skill_tree.gd" id="3_gmoyd"]
-[ext_resource type="FontFile" uid="uid://dud4cwhkrg1sc" path="res://ASSETS/FONT/Tomorrow/Tomorrow-MediumItalic.ttf" id="4_bx6r0"]
 [ext_resource type="Texture2D" uid="uid://c3rf32h46l151" path="res://ASSETS/UI/Sliced Images/- Resources/crystal.png" id="5_eul03"]
 [ext_resource type="Texture2D" uid="uid://ccipd6tecgqn1" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-PUSH.png" id="7_26yp0"]
 [ext_resource type="Texture2D" uid="uid://bfpbculgrxejg" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-HOVER.png" id="7_eul03"]
@@ -13,7 +12,12 @@
 [ext_resource type="Script" uid="uid://d1iua5pr1wj6l" path="res://SCRIPT/skill.gd" id="10_fh75w"]
 [ext_resource type="Texture2D" uid="uid://bphocvet6u2jx" path="res://ASSETS/UI/Sliced Images/Part_5/Spell Container/action_bar.png" id="12_dvew7"]
 [ext_resource type="FontFile" uid="uid://cylrbhu8kbjr2" path="res://ASSETS/FONT/Tomorrow/Tomorrow-BoldItalic.ttf" id="13_54h8i"]
+[ext_resource type="FontFile" uid="uid://clmiqh6eubsp6" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraLightItalic.ttf" id="14_48sa5"]
 [ext_resource type="Texture2D" uid="uid://loyyjkbwyh25" path="res://ASSETS/UI/Sliced Images/Part_5/Talents/talents_arrow_01.png" id="14_c7qt2"]
+[ext_resource type="FontFile" uid="uid://bhdeoncq2lwiu" path="res://ASSETS/FONT/Tomorrow/Tomorrow-Light.ttf" id="15_vowrh"]
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="16_cqrjl"]
+[ext_resource type="Texture2D" uid="uid://csmcuj8in65p4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_header_close.png" id="17_cqrjl"]
+[ext_resource type="Script" uid="uid://inyab2pb808b" path="res://SCRIPT/close.gd" id="18_wjnxj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh75w"]
 texture = ExtResource("7_26yp0")
@@ -35,65 +39,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_wxu6u")
 expand_mode = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1965229315]
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=184527649]
-position = Vector2(577.12494, 36.50001)
-scale = Vector2(0.49924397, 0.45294106)
-texture = ExtResource("2_gmoyd")
-region_enabled = true
-region_rect = Rect2(12.050476, 2.543518, 2315.429, 170.35736)
-
-[node name="COIN" type="TextureRect" parent="CanvasLayer" unique_id=1455497899]
-offset_left = 32.0
-offset_top = 19.0
-offset_right = 70.0
-offset_bottom = 57.0
-texture = ExtResource("3_3sqrx")
-expand_mode = 1
-
-[node name="COIN" type="Label" parent="CanvasLayer/COIN" unique_id=1737197942]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 23.0
-offset_top = -11.0
-offset_right = 124.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_bx6r0")
-theme_override_font_sizes/font_size = 20
-text = "COINS: 0"
-
-[node name="CRYSTAL" type="TextureRect" parent="CanvasLayer" unique_id=1463217666]
-offset_left = 189.0
-offset_top = 17.0
-offset_right = 223.0
-offset_bottom = 57.0
-texture = ExtResource("5_eul03")
-expand_mode = 1
-
-[node name="CRYSTAL" type="Label" parent="CanvasLayer/CRYSTAL" unique_id=566655621]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -11.0
-offset_right = 135.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_bx6r0")
-theme_override_font_sizes/font_size = 20
-text = "CRYSTAL: 0"
 
 [node name="SkillTree" type="Control" parent="." unique_id=1891425360]
 layout_mode = 3
@@ -167,6 +112,7 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="SkillTree/Contents/Button" unique_id=751916974]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -211,21 +157,89 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.0
-offset_top = -42.5
-offset_right = 127.0
-offset_bottom = 108.5
+offset_left = -129.5
+offset_top = -43.5
+offset_right = 129.5
+offset_bottom = 107.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=1900786091]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("14_48sa5")
 theme_override_font_sizes/font_size = 12
-text = "xxxxxx  	                                                   xxxxxx"
+text = "xxxxxx  	                                                              xxxxxx"
+
+[node name="Label2" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=214407147]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Label3" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=892243872]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vowrh")
+theme_override_font_sizes/font_size = 12
+text = "Upgrade Costs:"
+
+[node name="Label4" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=508818340]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vowrh")
+theme_override_font_sizes/font_size = 12
+text = "   X/10"
+
+[node name="Label5" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=2118912437]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vowrh")
+theme_override_font_sizes/font_size = 12
+text = "   X/1 "
 
 [node name="TalentsArrow01" type="Sprite2D" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=1520949825]
 position = Vector2(128, 10)
 scale = Vector2(0.3762679, 0.4732145)
 texture = ExtResource("14_c7qt2")
 
+[node name="COIN" type="TextureRect" parent="SkillTree/Contents/Button/Panel" unique_id=652089541]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 116.0
+offset_right = 80.0
+offset_bottom = 128.0
+texture = ExtResource("3_3sqrx")
+expand_mode = 1
+
+[node name="CRYSTAL" type="TextureRect" parent="SkillTree/Contents/Button/Panel" unique_id=882007173]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 134.39024
+offset_right = 80.0
+offset_bottom = 147.80487
+texture = ExtResource("5_eul03")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1965229315]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=184527649]
+position = Vector2(575.9375, 30.250004)
+scale = Vector2(0.500162, 0.4441176)
+texture = ExtResource("2_gmoyd")
+region_enabled = true
+region_rect = Rect2(12.050476, 2.543518, 2315.429, 170.35736)
+
+[node name="GAME" parent="CanvasLayer" unique_id=1584043507 instance=ExtResource("16_cqrjl")]
+
+[node name="Close" type="Button" parent="CanvasLayer" unique_id=767292702]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 10.0
+offset_right = -17.354858
+offset_bottom = 64.0
+grow_horizontal = 0
+icon = ExtResource("17_cqrjl")
+flat = true
+expand_icon = true
+script = ExtResource("18_wjnxj")
+
 [connection signal="button_up" from="SkillTree/Contents/Button" to="SkillTree/Contents/Button" method="_on_button_up"]
+[connection signal="button_down" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_up"]

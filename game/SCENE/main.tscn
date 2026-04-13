@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtpbjla8800en"]
 
 [ext_resource type="Texture2D" uid="uid://c7yj6rkmimo43" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button.png" id="1_0t5xj"]
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="1_57084"]
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="1_b6cqo"]
 [ext_resource type="Texture2D" uid="uid://cbr2beue13up8" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button-HOVER.png" id="1_lquar"]
 [ext_resource type="FontFile" uid="uid://tknjeoo6ng5k" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBold.ttf" id="2_8jknd"]
@@ -20,6 +21,19 @@ texture = ExtResource("1_lquar")
 texture = ExtResource("1_lquar")
 
 [node name="Node" type="Node" unique_id=336954405]
+
+[node name="BG" type="TextureRect" parent="." unique_id=528187801]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_57084")
+expand_mode = 1
 
 [node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("1_b6cqo")]
 

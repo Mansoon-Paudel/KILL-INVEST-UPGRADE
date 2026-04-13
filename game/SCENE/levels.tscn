@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://pgsgpotvr3d3"]
 
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="1_5oq38"]
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="1_ksqkb"]
 [ext_resource type="Texture2D" uid="uid://cbr2beue13up8" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button-HOVER.png" id="2_c0q3f"]
 [ext_resource type="Texture2D" uid="uid://c7yj6rkmimo43" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button.png" id="3_40ycc"]
 [ext_resource type="Script" uid="uid://cgvnbh07tqp4f" path="res://SCRIPT/button.gd" id="4_ksqkb"]
@@ -20,6 +21,19 @@ texture = ExtResource("2_c0q3f")
 texture = ExtResource("2_c0q3f")
 
 [node name="Node" type="Node" unique_id=2105142010]
+
+[node name="BG" type="TextureRect" parent="." unique_id=1337808007]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ksqkb")
+expand_mode = 1
 
 [node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("1_5oq38")]
 
