@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bmjwueoa7xxlt" path="res://SCRIPT/Player/player.gd" id="1_pm0ci"]
 [ext_resource type="Texture2D" uid="uid://cahwq7phl5dqt" path="res://ASSETS/character/PNG/Swordsman_lvl1/With_shadow/Swordsman_lvl1_attack_with_shadow.png" id="2_nc0w6"]
 [ext_resource type="Texture2D" uid="uid://cniu00lofp4iu" path="res://ASSETS/character/PNG/Swordsman_lvl1/With_shadow/Swordsman_lvl1_Walk_with_shadow.png" id="3_8kf2h"]
+[ext_resource type="Script" uid="uid://btml073v01jnq" path="res://SCRIPT/Player/camera_2d.gd" id="5_5ru6j"]
 [ext_resource type="PackedScene" uid="uid://uti5gfrqq5ak" path="res://SCENE/hurtbox.tscn" id="5_lk4ed"]
 [ext_resource type="PackedScene" uid="uid://q04bymqypnpp" path="res://SCENE/hitbox.tscn" id="5_wnrbk"]
 [ext_resource type="Script" uid="uid://dn62csypi2cr2" path="res://SCRIPT/Player/interactions.gd" id="6_lk4ed"]
@@ -755,6 +756,12 @@ height = 48.0
 collision_mask = 16
 script = ExtResource("1_pm0ci")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1734508087]
+position = Vector2(21, 30)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+script = ExtResource("5_5ru6j")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1483865877]
 texture_filter = 1
 position = Vector2(19.500002, 19.500002)
@@ -767,11 +774,6 @@ frame_progress = 0.65460646
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=690081606]
 position = Vector2(20, 21)
 shape = SubResource("CapsuleShape2D_qcmjf")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1734508087]
-position = Vector2(21, 30)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.5
 
 [node name="hitbox" parent="." unique_id=194441939 instance=ExtResource("5_wnrbk")]
 collision_layer = 1
@@ -793,6 +795,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Hurtbox" unique_id=1003483308]
-position = Vector2(-19, -15)
+position = Vector2(-19, -17)
 shape = SubResource("CapsuleShape2D_5ru6j")
 debug_color = Color(0.7438927, 0.019652568, 1.2513996e-06, 0.41960785)
