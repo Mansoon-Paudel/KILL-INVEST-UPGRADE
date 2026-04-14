@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 var cardinal_direction : Vector2 = Vector2.DOWN
 var move_speed = 100
@@ -12,6 +12,7 @@ var is_attacking : bool = false
 signal DirectionChanged(new_direction:Vector2) 
 
 func _ready() -> void:
+	GameState.player = self
 	UpdateAnimation()
 	sprite_2d.animation_finished.connect(_on_animation_finished)
 
