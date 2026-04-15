@@ -406,12 +406,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k0mlq"]
-radius = 6.0
-height = 26.0
+radius = 12.0
+height = 32.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=429098271]
 collision_layer = 256
-collision_mask = 16
+collision_mask = 273
 script = ExtResource("1_v7cil")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=357521950]

@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bxc4qciq8vwh0" path="res://SCENE/Player.tscn" id="4_ps6ws"]
 [ext_resource type="Script" uid="uid://bjp228pqiijde" path="res://SCENE/LevelTileMap.gd" id="4_scw50"]
 [ext_resource type="PackedScene" uid="uid://bcg6f4gh4qa1s" path="res://SCENE/enemy.tscn" id="6_6jr8t"]
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="8_2doxn"]
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="8_8634w"]
+[ext_resource type="Texture2D" uid="uid://csmcuj8in65p4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_header_close.png" id="9_jvumx"]
+[ext_resource type="Script" uid="uid://inyab2pb808b" path="res://SCRIPT/close.gd" id="10_dgre7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_scw50"]
 texture = ExtResource("1_8x7eh")
@@ -1664,7 +1668,9 @@ y_sort_enabled = true
 
 [node name="player" parent="." unique_id=1808031520 instance=ExtResource("4_ps6ws")]
 position = Vector2(546, 295)
-collision_mask = 0
+
+[node name="Enemy" parent="." unique_id=429098271 instance=ExtResource("6_6jr8t")]
+position = Vector2(468, 325)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=208675470]
 z_index = -1
@@ -1676,5 +1682,30 @@ script = ExtResource("4_scw50")
 [node name="Game-state" type="Node" parent="." unique_id=1749023915]
 script = ExtResource("1_vviah")
 
-[node name="Enemy" parent="." unique_id=429098271 instance=ExtResource("6_6jr8t")]
-position = Vector2(468, 325)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=96214843]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=1536740261]
+position = Vector2(575.9375, 30.250004)
+scale = Vector2(0.500162, 0.4441176)
+texture = ExtResource("8_2doxn")
+region_enabled = true
+region_rect = Rect2(12.050476, 2.543518, 2315.429, 170.35736)
+
+[node name="Close" type="Button" parent="CanvasLayer" unique_id=1427735769]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 5.0
+offset_right = -17.354858
+offset_bottom = 59.0
+grow_horizontal = 0
+icon = ExtResource("9_jvumx")
+flat = true
+expand_icon = true
+script = ExtResource("10_dgre7")
+
+[node name="GAME" parent="CanvasLayer" unique_id=1584043507 instance=ExtResource("8_8634w")]
+
+[connection signal="button_down" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_up"]

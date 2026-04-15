@@ -226,14 +226,14 @@ region_rect = Rect2(12.050476, 2.543518, 2315.429, 170.35736)
 
 [node name="GAME" parent="CanvasLayer" unique_id=1584043507 instance=ExtResource("16_cqrjl")]
 
-[node name="Close" type="Button" parent="CanvasLayer" unique_id=767292702]
+[node name="Close" type="Button" parent="CanvasLayer" unique_id=361167923]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -76.0
-offset_top = 10.0
+offset_top = 5.0
 offset_right = -17.354858
-offset_bottom = 64.0
+offset_bottom = 59.0
 grow_horizontal = 0
 icon = ExtResource("17_cqrjl")
 flat = true
