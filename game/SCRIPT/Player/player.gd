@@ -5,6 +5,7 @@ var move_speed = 100
 var direction: Vector2 = Vector2.ZERO
 @onready var hurtbox: HurtBox = $Interactions/Hurtbox
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player: Player = $"."
 var state : String = "Idle"
 var new_state : String
 var is_attacking : bool = false
@@ -13,6 +14,7 @@ signal DirectionChanged(new_direction:Vector2)
 
 func _ready() -> void:
 	GameState.player = self
+	player.position = GameState.player_position 
 	UpdateAnimation()
 	sprite_2d.animation_finished.connect(_on_animation_finished)
 
