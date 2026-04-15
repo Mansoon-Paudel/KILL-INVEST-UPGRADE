@@ -5,4 +5,4 @@ extends Node
 
 func _process(delta):
 	coin.text = "COINS: " + str(GameState.Coin)
-	crystal.text= "CRYSTAL:" + str(GameState.Crystal)
+	crystal.text= "CRYSTAL: " + str(GameState.Crystal)

@@ -5,6 +5,7 @@ var level = 1
 var Coin = 0
 var Crystal = 0
 var enemy_kill_count = 0
+var damage = 1
 var player_position = Vector2(568, 202)
 var current_zone = "zone_1"
 var current_tilemap_bounds : Array[Vector2]

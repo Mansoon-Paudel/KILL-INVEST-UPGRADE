@@ -3,19 +3,21 @@
 [ext_resource type="Texture2D" uid="uid://o18r3sjwf36v" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full.png" id="1_wxu6u"]
 [ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="2_gmoyd"]
 [ext_resource type="Texture2D" uid="uid://cypwsmo06e800" path="res://ASSETS/UI/Sliced Images/- Resources/coin.png" id="3_3sqrx"]
-[ext_resource type="Script" uid="uid://dvd1hvoxi7ou4" path="res://SCRIPT/skill_tree.gd" id="3_gmoyd"]
+[ext_resource type="Script" uid="uid://dvd1hvoxi7ou4" path="res://SCRIPT/Skill-tree/skill_tree.gd" id="3_gmoyd"]
 [ext_resource type="Texture2D" uid="uid://c3rf32h46l151" path="res://ASSETS/UI/Sliced Images/- Resources/crystal.png" id="5_eul03"]
 [ext_resource type="Texture2D" uid="uid://ccipd6tecgqn1" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-PUSH.png" id="7_26yp0"]
 [ext_resource type="Texture2D" uid="uid://bfpbculgrxejg" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-HOVER.png" id="7_eul03"]
 [ext_resource type="Texture2D" uid="uid://p116i44oxqrl" path="res://ASSETS/UI/Sliced Images/Part_3/MOBA - Items & Stats/dmg_icon.png" id="8_eul03"]
 [ext_resource type="Texture2D" uid="uid://d3sk8onlgtpi5" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small.png" id="8_oax2y"]
-[ext_resource type="Script" uid="uid://d1iua5pr1wj6l" path="res://SCRIPT/skill.gd" id="10_fh75w"]
+[ext_resource type="Script" uid="uid://da0csim4ivh2w" path="res://SCRIPT/Skill-tree/Upgrade.gd" id="8_wjnxj"]
+[ext_resource type="Script" uid="uid://d1iua5pr1wj6l" path="res://SCRIPT/Skill-tree/skill.gd" id="10_fh75w"]
 [ext_resource type="Texture2D" uid="uid://bphocvet6u2jx" path="res://ASSETS/UI/Sliced Images/Part_5/Spell Container/action_bar.png" id="12_dvew7"]
 [ext_resource type="FontFile" uid="uid://cylrbhu8kbjr2" path="res://ASSETS/FONT/Tomorrow/Tomorrow-BoldItalic.ttf" id="13_54h8i"]
 [ext_resource type="FontFile" uid="uid://clmiqh6eubsp6" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraLightItalic.ttf" id="14_48sa5"]
 [ext_resource type="Texture2D" uid="uid://loyyjkbwyh25" path="res://ASSETS/UI/Sliced Images/Part_5/Talents/talents_arrow_01.png" id="14_c7qt2"]
 [ext_resource type="FontFile" uid="uid://bhdeoncq2lwiu" path="res://ASSETS/FONT/Tomorrow/Tomorrow-Light.ttf" id="15_vowrh"]
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="16_cqrjl"]
+[ext_resource type="Script" uid="uid://3l6y2ekgpqkc" path="res://SCRIPT/Skill-tree/Attack_Upgrade.gd" id="16_guusw"]
 [ext_resource type="Texture2D" uid="uid://csmcuj8in65p4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_header_close.png" id="17_cqrjl"]
 [ext_resource type="Script" uid="uid://inyab2pb808b" path="res://SCRIPT/close.gd" id="18_wjnxj"]
 
@@ -112,7 +114,6 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="SkillTree/Contents/Button" unique_id=751916974]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -125,6 +126,7 @@ offset_right = 327.75
 offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("8_wjnxj")
 
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button/Panel" unique_id=76037825]
 layout_mode = 1
@@ -168,7 +170,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("14_48sa5")
 theme_override_font_sizes/font_size = 12
-text = "xxxxxx  	                                                              xxxxxx"
+text = "  x  	                                                                               x"
 
 [node name="Label2" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=214407147]
 layout_mode = 2
@@ -184,7 +186,7 @@ text = "Upgrade Costs:"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("15_vowrh")
 theme_override_font_sizes/font_size = 12
-text = "   X/10"
+text = "   X/1"
 
 [node name="Label5" type="Label" parent="SkillTree/Contents/Button/Panel/VBoxContainer" unique_id=2118912437]
 layout_mode = 2
@@ -214,6 +216,12 @@ offset_right = 80.0
 offset_bottom = 147.80487
 texture = ExtResource("5_eul03")
 expand_mode = 1
+
+[node name="Purchase Attack" type="Button" parent="SkillTree/Contents/Button/Panel" unique_id=1996807947]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("16_guusw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1965229315]
 
