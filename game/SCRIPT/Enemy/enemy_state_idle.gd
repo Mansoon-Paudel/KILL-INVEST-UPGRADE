@@ -1,4 +1,4 @@
-class_name EnemyStateIdle extends EnemyState
+class_name EnemyStateId extends EnemyState
 
 @export var anim_name: String= "Idle"
 
