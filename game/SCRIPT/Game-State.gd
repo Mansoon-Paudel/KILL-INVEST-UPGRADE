@@ -1,6 +1,5 @@
 class_name manager extends Node
-@onready var player: Player = $"../player"
-
+var player:Player
 var level = 1
 var Coin = 0
 var Crystal = 0

@@ -1,109 +1,47 @@
 class_name Player extends CharacterBody2D
 
-var cardinal_direction : Vector2 = Vector2.DOWN
-var move_speed = 100
-var direction: Vector2 = Vector2.ZERO
-@onready var hurtbox: HurtBox = $Interactions/Hurtbox
-@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var player: Player = $"."
-var state : String = "Idle"
-var new_state : String
-var is_attacking : bool = false
+const SPEED = 230.0
+const JUMP_VELOCITY = -460.0
+const COYOTE_TIME = 0.13
 
-signal DirectionChanged(new_direction:Vector2) 
+@onready var sprite2D: AnimatedSprite2D = $AnimatedSprite2D
 
-func _ready() -> void:
-	GameState.player = self
-	player.position = GameState.player_position 
-	UpdateAnimation()
-	sprite_2d.animation_finished.connect(_on_animation_finished)
-
-func _process(delta: float) -> void:
-	if is_attacking:
-		velocity = Vector2.ZERO
-		return
-	
-	direction.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-	direction.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
-	velocity = direction * move_speed
-	
-	var direction_changed = Set_direction()
-	var state_changed = Set_state()
-	
-	if direction_changed or state_changed:
-		UpdateAnimation()
-	
-	if Input.is_action_just_pressed("Attack"):
-		Start_attack()
+var coyote_timer = 0.0
 
 func _physics_process(delta: float) -> void:
+	# Gravity
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		coyote_timer -= delta
+	else:
+		coyote_timer = COYOTE_TIME
+
+	# Jump
+	if Input.is_action_just_pressed("Up"):
+		if is_on_floor() or coyote_timer > 0.0:
+			velocity.y = JUMP_VELOCITY
+			coyote_timer = 0.0
+
+	# Movement
+	var direction := Input.get_axis("Left", "Right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, 18)
+
 	move_and_slide()
-
-func Start_attack() -> void:
-	is_attacking = true
-	state = "Attack"
 	UpdateAnimation()
-	await get_tree().create_timer(0.15).timeout
-	hurtbox.monitoring=true
-
-
-func _on_animation_finished() -> void:
-	if state == "Attack":
-		is_attacking = false
-		state = "Idle"
-		hurtbox.monitoring=false
-		UpdateAnimation()
-
-func Set_direction() -> bool:
-	if direction == Vector2.ZERO:
-		return false
-
-	var new_dir : Vector2
-
-	if abs(direction.x) >= abs(direction.y):
-		if direction.x > 0:
-			new_dir = Vector2.RIGHT
-		else:
-			new_dir = Vector2.LEFT
-	else:
-		if direction.y > 0:
-			new_dir = Vector2.DOWN
-		else:
-			new_dir = Vector2.UP
-
-	if new_dir == cardinal_direction:
-		return false
-	
-	cardinal_direction = new_dir
-	DirectionChanged.emit(new_dir)
-	cardinal_direction = new_dir
-	return true
-	
-	
-
-func Set_state() -> bool:
-	if is_attacking:
-		return false
-	
-	if direction == Vector2.ZERO:
-		new_state = "Idle"
-	else:
-		new_state = "Walk"
-
-	if new_state == state:
-		return false
-	state = new_state
-	return true
 
 func UpdateAnimation() -> void:
-	sprite_2d.play(state + "_" + AnimDirection())
+	if velocity.x > 1:
+		sprite2D.flip_h = false
+	elif velocity.x < -1:
+		sprite2D.flip_h = true
 
-func AnimDirection() -> String:
-	if cardinal_direction == Vector2.UP:
-		return "Up"
-	elif cardinal_direction == Vector2.DOWN:
-		return "Down"
-	elif cardinal_direction == Vector2.LEFT:
-		return "Left"
+	if not is_on_floor():
+		sprite2D.play("Jump")
+	elif velocity.x > 1 or velocity.x < -1:
+		sprite2D.play("Left")
 	else:
-		return "Right"
+		sprite2D.flip_h = false
+		sprite2D.play("Idle")

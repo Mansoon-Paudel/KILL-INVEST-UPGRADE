@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player: Player = $player
+
 
 func _on_button_3_pressed() -> void:
 	pass
