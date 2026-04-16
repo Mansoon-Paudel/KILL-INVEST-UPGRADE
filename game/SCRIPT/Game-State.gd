@@ -1,8 +1,8 @@
 class_name manager extends Node
 var player:Player
 var level = 1
-var Coin = 0
-var Crystal = 0
+var Coin = 6
+var Crystal = 6
 var enemy_kill_count = 0
 var enemy_damage = 1
 var damage = 1

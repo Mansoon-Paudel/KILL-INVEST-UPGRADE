@@ -163,7 +163,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_55u1c")
 theme_override_font_sizes/font_size = 44
-text = "SHOP"
+text = "UPGRADES"
 horizontal_alignment = 1
 
 [node name="MANAGER" type="Node" parent="." unique_id=409586217]
