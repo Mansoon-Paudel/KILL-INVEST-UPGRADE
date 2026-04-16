@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ddvinthhey40w" path="res://ASSETS/Map/Tiled_files/Objects.png" id="3_6jr8t"]
 [ext_resource type="Script" uid="uid://bjp228pqiijde" path="res://SCRIPT/LevelTileMap.gd" id="4_scw50"]
 [ext_resource type="PackedScene" uid="uid://bxc4qciq8vwh0" path="res://SCENE/player.tscn" id="5_ps6ws"]
+[ext_resource type="PackedScene" uid="uid://bcg6f4gh4qa1s" path="res://SCENE/enemy.tscn" id="6_6jr8t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8634w"]
 texture = ExtResource("1_8x7eh")
@@ -1785,4 +1786,7 @@ layer_0/tile_data = PackedInt32Array(1835007, 196609, 5, 1900543, 196609, 5, 196
 script = ExtResource("4_scw50")
 
 [node name="Player" parent="." unique_id=2050904042 instance=ExtResource("5_ps6ws")]
-position = Vector2(567, 356)
+position = Vector2(568, 415)
+
+[node name="Enemy" parent="." unique_id=885736534 instance=ExtResource("6_6jr8t")]
+position = Vector2(748, 407)

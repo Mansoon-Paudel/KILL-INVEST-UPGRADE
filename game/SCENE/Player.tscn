@@ -3,9 +3,42 @@
 [ext_resource type="Texture2D" uid="uid://bblch2o736s34" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Idle_without_shadow.png" id="1_pvtcc"]
 [ext_resource type="Script" uid="uid://b064qmm2dktuk" path="res://SCRIPT/Player/player.gd" id="1_s47mi"]
 [ext_resource type="Texture2D" uid="uid://rodca3kfvdj2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_without_shadow.png" id="2_a2qa7"]
+[ext_resource type="Texture2D" uid="uid://c2ul0hul61tjf" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_attack_without_shadow.png" id="2_j4mn8"]
 [ext_resource type="Texture2D" uid="uid://bqaukn48dj821" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Run_without_shadow.png" id="3_74isj"]
 [ext_resource type="Script" uid="uid://btml073v01jnq" path="res://SCRIPT/Player/camera_2d.gd" id="3_m0ta0"]
 [ext_resource type="Texture2D" uid="uid://dvaygu8dfclx2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_Attack_without_shadow.png" id="3_qnhi1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qhaj"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4760p"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p17jl"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cshe"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fr5n"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47cen"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea4ax"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2ipx"]
+atlas = ExtResource("2_j4mn8")
+region = Rect2(448, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2qa7"]
 atlas = ExtResource("1_pvtcc")
@@ -115,6 +148,35 @@ region = Rect2(320, 64, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4qhaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4760p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p17jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cshe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fr5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47cen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea4ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2ipx")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_a2qa7")
 }, {
 "duration": 1.0,
@@ -213,23 +275,35 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s47mi"]
-radius = 9.0
-height = 32.0
+radius = 5.0
+height = 26.0
 
 [node name="Player" type="CharacterBody2D" unique_id=2050904042]
 script = ExtResource("1_s47mi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=587323089]
 texture_filter = 1
-position = Vector2(0, -4.157894)
-scale = Vector2(1.6875, 1.7763158)
+position = Vector2(-4, -6)
+scale = Vector2(1.4687499, 1.5460526)
 sprite_frames = SubResource("SpriteFrames_8wr0p")
-animation = &"Jump"
-frame_progress = 0.5615903
+animation = &"Attack"
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954622635]
-position = Vector2(0, -1.3157883)
+position = Vector2(-1, -5)
 shape = SubResource("CapsuleShape2D_s47mi")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1180303780]
+position = Vector2(36, -15)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
 script = ExtResource("3_m0ta0")
+
+[node name="Footstep Stream" type="AudioStreamPlayer" parent="." unique_id=1069246219]
+volume_db = -5.0
+
+[node name="Attack stream" type="AudioStreamPlayer" parent="." unique_id=1288562892]
+
+[node name="Jump stream" type="AudioStreamPlayer" parent="." unique_id=343667514]
+volume_db = 4.0

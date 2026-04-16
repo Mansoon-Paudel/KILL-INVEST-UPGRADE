@@ -1,6 +1,7 @@
-class_name HitBox extends Area2D
+extends Area2D
 
-signal Damaged( damage : int)
-func TakeDamage( damage : int) -> void:
-	print("Damage:", damage)
-	Damaged.emit(damage)
+@onready var enemy = get_parent()
+
+func _on_area_entered(area):
+	if area.name == "PlayerAttack":
+		enemy.take_damage(1)

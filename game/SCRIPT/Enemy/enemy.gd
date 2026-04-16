@@ -1,0 +1,66 @@
+extends CharacterBody2D
+
+enum State {
+	IDLE,
+	CHASE,
+	ATTACK,
+	STUN,
+	DEAD
+}
+
+var current_state = State.IDLE
+
+@export var speed:float = 100
+@export var gravity = 900
+@export var health = 3
+
+var player = null
+var can_attack = false
+
+@onready var sprite = $AnimatedSprite2D
+@onready var detection = $DetectionZone
+@onready var attack_zone = $AttackZone
+
+func _physics_process(delta):
+	apply_gravity(delta)
+	state_machine(delta)
+	move_and_slide()
+
+func apply_gravity(delta):
+	if not is_on_floor():
+		velocity.x += gravity * delta
+
+
+func state_machine(delta):
+	match current_state:
+		State.IDLE:
+			sprite.play("idle")
+			if player:
+				current_state = State.CHASE
+
+		State.CHASE:
+			chase_player()
+			sprite.play("walk")
+			if can_attack:
+				current_state = State.ATTACK
+		State.ATTACK:
+			attack()
+		State.STUN:
+			velocity.x = 0
+		State.DEAD:
+			queue_free()
+
+func chase_player():
+	if player == null:
+		current_state = State.IDLE
+		return
+	var direction = sign(player.global_position.x - global_position.x)
+	velocity.x = direction * speed
+	sprite.flip_h = direction < 0
+func attack():
+	velocity.x = 0
+	sprite.play("attack")
+	await sprite.animation_finished
+	if can_attack:
+		pass
+	current_state = State.CHASE
