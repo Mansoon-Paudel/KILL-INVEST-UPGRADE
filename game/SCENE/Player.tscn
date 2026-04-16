@@ -278,12 +278,16 @@ animations = [{
 radius = 5.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D" unique_id=2050904042]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j4mn8"]
+radius = 35.0
+height = 70.0
+
+[node name="Player" type="CharacterBody2D" unique_id=2050904042 groups=["Player", "player"]]
 script = ExtResource("1_s47mi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=587323089]
 texture_filter = 1
-position = Vector2(-4, -6)
+position = Vector2(-2, -6)
 scale = Vector2(1.4687499, 1.5460526)
 sprite_frames = SubResource("SpriteFrames_8wr0p")
 animation = &"Attack"
@@ -307,3 +311,9 @@ volume_db = -5.0
 
 [node name="Jump stream" type="AudioStreamPlayer" parent="." unique_id=343667514]
 volume_db = 4.0
+
+[node name="PlayerAttack" type="Area2D" parent="." unique_id=2008862576 groups=["player_attack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttack" unique_id=987918282]
+position = Vector2(11, -8)
+shape = SubResource("CapsuleShape2D_j4mn8")

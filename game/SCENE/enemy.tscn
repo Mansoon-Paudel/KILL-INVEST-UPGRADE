@@ -10,11 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://q04bymqypnpp" path="res://SCENE/hitbox.tscn" id="5_lf0sp"]
 [ext_resource type="Texture2D" uid="uid://kdref6g8cwlk" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack4.png" id="5_rppbq"]
 [ext_resource type="Texture2D" uid="uid://c6wgc1ua5nniy" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack5.png" id="6_prs5n"]
+[ext_resource type="Texture2D" uid="uid://drfs7oqbs82md" path="res://ASSETS/Enemy/enemy/PNG/Bear/Hurt1.png" id="7_otmlh"]
+[ext_resource type="Texture2D" uid="uid://ceh4oexe4crp6" path="res://ASSETS/Enemy/enemy/PNG/Bear/Hurt2.png" id="8_rl1t2"]
 [ext_resource type="Texture2D" uid="uid://b1b3en0h85j1g" path="res://ASSETS/Enemy/enemy/PNG/Bear/Walk1.png" id="10_cfwvv"]
 [ext_resource type="Script" uid="uid://d1ioh0u1dtdyx" path="res://SCRIPT/Enemy/detection_zone.gd" id="11_iftbg"]
 [ext_resource type="Texture2D" uid="uid://ymgg5em2oxic" path="res://ASSETS/Enemy/enemy/PNG/Bear/Walk2.png" id="11_k0mlq"]
 [ext_resource type="Texture2D" uid="uid://d0453ypuc630w" path="res://ASSETS/Enemy/enemy/PNG/Bear/Walk3.png" id="12_otmlh"]
-[ext_resource type="Script" uid="uid://d123pjmhm2vg3" path="res://SCENE/attack_zone.gd" id="12_rppbq"]
+[ext_resource type="Script" uid="uid://d123pjmhm2vg3" path="res://SCRIPT/Enemy/attack_zone.gd" id="12_rppbq"]
 [ext_resource type="Texture2D" uid="uid://cd6jfjfhw5vb" path="res://ASSETS/Enemy/enemy/PNG/Bear/Walk4.png" id="13_rl1t2"]
 [ext_resource type="Texture2D" uid="uid://it2sqxhc2wh4" path="res://ASSETS/Enemy/enemy/PNG/Bear/Walk5.png" id="14_p11n0"]
 
@@ -39,6 +41,17 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_otmlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rl1t2")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -75,56 +88,66 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a4gjr"]
-radius = 21.998947
-height = 85.99587
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otmlh"]
+radius = 20.842352
+height = 63.977356
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl1t2"]
+size = Vector2(46.487293, 81.99606)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atvc4"]
-radius = 214.28252
+radius = 90.27181
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_740hj"]
-radius = 89.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_otmlh"]
+radius = 170.29973
 
 [node name="Enemy" type="CharacterBody2D" unique_id=885736534]
 script = ExtResource("1_7s3rj")
+health = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=751838751]
 texture_filter = 1
-position = Vector2(5, -22)
+position = Vector2(-3, -27)
+scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_kobn3")
-animation = &"attack"
-frame = 4
-frame_progress = 1.0
+animation = &"idle"
+frame_progress = 0.9165273
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=638421002]
-position = Vector2(0, -1)
+position = Vector2(10.991747, -3.8432713)
 rotation = 1.5610062
-shape = SubResource("CapsuleShape2D_a4gjr")
+shape = SubResource("CapsuleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("5_lf0sp")]
+position = Vector2(-12, 0)
+collision_layer = 1
+collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=518041343]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
+position = Vector2(24.49045, -3.9754298)
+rotation = 1.5610062
+shape = SubResource("RectangleShape2D_rl1t2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1578546152]
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=290527920]
 position = Vector2(-431, 106)
-collision_layer = 0
 script = ExtResource("11_iftbg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1197730915]
 position = Vector2(431, -106)
 shape = SubResource("CircleShape2D_atvc4")
 
-[node name="AttackZone" type="Area2D" parent="." unique_id=1086275580]
+[node name="AttackZone" type="Area2D" parent="." unique_id=533653612]
 position = Vector2(-431, 106)
-collision_layer = 0
 script = ExtResource("12_rppbq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=1438255444]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=294269170]
 position = Vector2(431, -106)
-shape = SubResource("CircleShape2D_740hj")
+shape = SubResource("CircleShape2D_otmlh")
 
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="DetectionZone" to="DetectionZone" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="DetectionZone" method="_on_body_exited"]
 [connection signal="body_entered" from="AttackZone" to="AttackZone" method="_on_body_entered"]
