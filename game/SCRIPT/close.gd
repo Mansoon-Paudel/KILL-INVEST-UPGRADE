@@ -1,7 +1,9 @@
 extends Button
 
 @onready var button: Button = $"."
-@onready var player: Player = $"../../player"
+@onready var player: Player = $"../../Player"
+
+
 
 
 func _process(delta):

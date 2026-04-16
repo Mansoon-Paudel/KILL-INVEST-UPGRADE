@@ -3,10 +3,14 @@
 [ext_resource type="Script" uid="uid://box2on53sler3" path="res://SCRIPT/Enemy/enemy.gd" id="1_7s3rj"]
 [ext_resource type="Texture2D" uid="uid://df737i4rdcoyn" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack1.png" id="2_84ble"]
 [ext_resource type="Texture2D" uid="uid://7cyadmdvo531" path="res://ASSETS/Enemy/enemy/PNG/Bear/Idle1.png" id="2_a4gjr"]
+[ext_resource type="Texture2D" uid="uid://fk0c2hxw4bxa" path="res://ASSETS/Enemy/enemy/PNG/Bear/Death1.png" id="2_lmpi2"]
 [ext_resource type="Texture2D" uid="uid://bmuwqrojwqwhc" path="res://ASSETS/Enemy/enemy/PNG/Bear/Idle2.png" id="3_atvc4"]
+[ext_resource type="Texture2D" uid="uid://rbqoe62qmrpp" path="res://ASSETS/Enemy/enemy/PNG/Bear/Death2.png" id="3_blqlw"]
 [ext_resource type="Texture2D" uid="uid://djkudgdtitqcs" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack2.png" id="3_ild5t"]
+[ext_resource type="Texture2D" uid="uid://homjjix4bs25" path="res://ASSETS/Enemy/enemy/PNG/Bear/Death3.png" id="4_cqa3r"]
 [ext_resource type="Texture2D" uid="uid://r44iusycotbe" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack3.png" id="4_iftbg"]
 [ext_resource type="Texture2D" uid="uid://fxuv8mto1jdt" path="res://ASSETS/Enemy/enemy/PNG/Bear/Idle3.png" id="4_imx60"]
+[ext_resource type="Texture2D" uid="uid://dxxmgc7k38l03" path="res://ASSETS/Enemy/enemy/PNG/Bear/Death4.png" id="5_hlvm3"]
 [ext_resource type="PackedScene" uid="uid://q04bymqypnpp" path="res://SCENE/hitbox.tscn" id="5_lf0sp"]
 [ext_resource type="Texture2D" uid="uid://kdref6g8cwlk" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack4.png" id="5_rppbq"]
 [ext_resource type="Texture2D" uid="uid://c6wgc1ua5nniy" path="res://ASSETS/Enemy/enemy/PNG/Bear/Attack5.png" id="6_prs5n"]
@@ -22,6 +26,23 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kobn3"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lmpi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_blqlw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cqa3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hlvm3")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_84ble")
@@ -51,7 +72,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -109,12 +130,12 @@ texture_filter = 1
 position = Vector2(-3, -27)
 scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_kobn3")
-animation = &"idle"
-frame_progress = 0.9165273
+animation = &"hurt"
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
 position = Vector2(-17, -4)
 shape = SubResource("RectangleShape2D_otmlh")
+disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
 position = Vector2(12.5, -4)

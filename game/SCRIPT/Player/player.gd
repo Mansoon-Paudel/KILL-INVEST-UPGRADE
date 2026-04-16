@@ -9,6 +9,7 @@ const COYOTE_TIME = 0.13
 @onready var attack_player: AudioStreamPlayer = $"Attack stream"
 @onready var jump_player: AudioStreamPlayer = $"Jump stream"
 @onready var player_attack: Area2D = $PlayerAttack
+@onready var player: Player = $"."
 
 const jmp = preload("res://ASSETS/SOUNDS/SFX/Player/jump.ogg")
 const slice = preload("res://ASSETS/SOUNDS/SFX/Player/slice.wav")
@@ -31,6 +32,7 @@ var is_invincible = false
 const INVINCIBILITY_DURATION = 0.8
 
 func _ready() -> void:
+	player.position=GameState.player_position
 	player_attack.monitoring = false
 	player_attack.monitorable = false
 	  
