@@ -88,9 +88,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otmlh"]
-radius = 20.842352
-height = 63.977356
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otmlh"]
+size = Vector2(85, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rl1t2"]
 size = Vector2(46.487293, 81.99606)
@@ -112,12 +111,14 @@ scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_kobn3")
 animation = &"idle"
 frame_progress = 0.9165273
-flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=638421002]
-position = Vector2(10.991747, -3.8432713)
-rotation = 1.5610062
-shape = SubResource("CapsuleShape2D_otmlh")
+[node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
+position = Vector2(-17, -4)
+shape = SubResource("RectangleShape2D_otmlh")
+
+[node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
+position = Vector2(12.5, -4)
+shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("5_lf0sp")]
 position = Vector2(-12, 0)

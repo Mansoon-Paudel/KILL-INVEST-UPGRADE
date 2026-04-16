@@ -18,8 +18,10 @@ var player = null
 var can_attack = false
 var is_attacking = false
 var is_stunned = false
+@onready var lft: CollisionShape2D = $CollisionShape2D_left
+@onready var  rgt: CollisionShape2D = $CollisionShape2D_right
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-@onready var sprite = $AnimatedSprite2D
 @onready var detection = $DetectionZone
 @onready var attack_zone = $AttackZone
 
@@ -57,7 +59,16 @@ func chase_player():
 		return
 	var direction = sign(player.global_position.x - global_position.x)
 	velocity.x = direction * speed
-	sprite.flip_h = direction < 0
+	if direction<0:
+		sprite.flip_h = true
+		
+		lft.disabled=true
+		rgt.disabled=false
+	else:
+		sprite.flip_h = false
+		rgt.disabled=true
+		lft.disabled=false
+		
 func attack():
 	if is_attacking:
 		return
