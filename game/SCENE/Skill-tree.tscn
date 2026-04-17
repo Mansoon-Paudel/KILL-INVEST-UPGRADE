@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bfpbculgrxejg" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small-HOVER.png" id="4_8oiwq"]
 [ext_resource type="Texture2D" uid="uid://d3sk8onlgtpi5" path="res://ASSETS/UI/Sliced Images/Part_10/Complete/button_small.png" id="5_3bgnl"]
 [ext_resource type="Script" uid="uid://d1iua5pr1wj6l" path="res://SCRIPT/Skill-tree/skill.gd" id="6_qe3pd"]
+[ext_resource type="Texture2D" uid="uid://sgp5eyidp0vr" path="res://ASSETS/UI/Sliced Images/Part_5/Talents/talents_spell_frame.png" id="7_3bgnl"]
 [ext_resource type="Texture2D" uid="uid://p116i44oxqrl" path="res://ASSETS/UI/Sliced Images/Part_3/MOBA - Items & Stats/dmg_icon.png" id="7_pd3y3"]
-[ext_resource type="Script" uid="uid://da0csim4ivh2w" path="res://SCRIPT/Skill-tree/Upgrade.gd" id="8_fsmkg"]
+[ext_resource type="Script" uid="uid://da0csim4ivh2w" path="res://SCRIPT/Skill-tree/Upgradeatk.gd" id="8_fsmkg"]
 [ext_resource type="Texture2D" uid="uid://bphocvet6u2jx" path="res://ASSETS/UI/Sliced Images/Part_5/Spell Container/action_bar.png" id="9_ksw6g"]
 [ext_resource type="FontFile" uid="uid://cylrbhu8kbjr2" path="res://ASSETS/FONT/Tomorrow/Tomorrow-BoldItalic.ttf" id="10_lflme"]
 [ext_resource type="FontFile" uid="uid://clmiqh6eubsp6" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraLightItalic.ttf" id="11_y62th"]
@@ -22,7 +23,11 @@
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="19_6cf2a"]
 [ext_resource type="Script" uid="uid://dp6l7mpf626kj" path="res://SCRIPT/Skill-tree/Dash_Upgrade.gd" id="19_jt0jy"]
 [ext_resource type="Texture2D" uid="uid://csmcuj8in65p4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_header_close.png" id="20_fpc3y"]
+[ext_resource type="Script" uid="uid://dv7wypi8wioxp" path="res://SCRIPT/Skill-tree/Upgradedash.gd" id="20_pd3y3"]
 [ext_resource type="Script" uid="uid://inyab2pb808b" path="res://SCRIPT/close.gd" id="21_0stnx"]
+[ext_resource type="Texture2D" uid="uid://xqdl2a2q2cg8" path="res://ASSETS/UI/Sliced Images/Part_3/MOBA - Items & Stats/deff_icon.png" id="21_qe3pd"]
+[ext_resource type="Script" uid="uid://dplif22ttw5x" path="res://SCRIPT/Skill-tree/Upgradedef.gd" id="23_fsmkg"]
+[ext_resource type="Script" uid="uid://b7qt5i3w35m2l" path="res://SCRIPT/Skill-tree/Health_Upgrade.gd" id="24_fsmkg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh75w"]
 texture = ExtResource("3_jt0jy")
@@ -86,6 +91,11 @@ flat = true
 expand_icon = true
 script = ExtResource("6_qe3pd")
 
+[node name="TalentsSpellFrame" type="Sprite2D" parent="SkillTree/Contents/Button" unique_id=1274961328]
+position = Vector2(48.25, 46.75)
+scale = Vector2(0.6583337, 0.65833366)
+texture = ExtResource("7_3bgnl")
+
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button" unique_id=477285050]
 texture_filter = 1
 layout_mode = 1
@@ -101,20 +111,6 @@ offset_bottom = 19.03846
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_pd3y3")
-
-[node name="TextureRect2" type="TextureRect" parent="SkillTree/Contents/Button" unique_id=466998274]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 11.75
-offset_top = -63.0
-offset_right = 163.75
-offset_bottom = -38.0
-grow_horizontal = 0
-grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="SkillTree/Contents/Button" unique_id=751916974]
 visible = false
@@ -278,6 +274,11 @@ flat = true
 expand_icon = true
 script = ExtResource("6_qe3pd")
 
+[node name="TalentsSpellFrame" type="Sprite2D" parent="SkillTree/Contents/Button3" unique_id=1264312836]
+position = Vector2(48.25, 46.75)
+scale = Vector2(0.6583337, 0.65833366)
+texture = ExtResource("7_3bgnl")
+
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button3" unique_id=325299596]
 texture_filter = 1
 layout_mode = 1
@@ -295,6 +296,7 @@ grow_vertical = 2
 texture = ExtResource("18_vhbv5")
 
 [node name="Panel" type="Panel" parent="SkillTree/Contents/Button3" unique_id=1477685838]
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = 6
@@ -308,7 +310,7 @@ offset_right = 321.75
 offset_bottom = 131.25
 grow_horizontal = 0
 grow_vertical = 2
-script = ExtResource("8_fsmkg")
+script = ExtResource("20_pd3y3")
 
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button3/Panel" unique_id=506192529]
 layout_mode = 1
@@ -457,6 +459,11 @@ flat = true
 expand_icon = true
 script = ExtResource("6_qe3pd")
 
+[node name="TalentsSpellFrame" type="Sprite2D" parent="SkillTree/Contents/Button2" unique_id=442607139]
+position = Vector2(48.25, 46.75)
+scale = Vector2(0.6583337, 0.65833366)
+texture = ExtResource("7_3bgnl")
+
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button2" unique_id=799518827]
 texture_filter = 1
 layout_mode = 1
@@ -471,21 +478,7 @@ offset_right = 18.5
 offset_bottom = 19.03846
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_pd3y3")
-
-[node name="TextureRect2" type="TextureRect" parent="SkillTree/Contents/Button2" unique_id=1071598672]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 11.75
-offset_top = -63.0
-offset_right = 163.75
-offset_bottom = -38.0
-grow_horizontal = 0
-grow_vertical = 2
+texture = ExtResource("21_qe3pd")
 
 [node name="Panel" type="Panel" parent="SkillTree/Contents/Button2" unique_id=1974258633]
 visible = false
@@ -502,7 +495,7 @@ offset_right = 327.75
 offset_bottom = 96.0
 grow_horizontal = 0
 grow_vertical = 2
-script = ExtResource("8_fsmkg")
+script = ExtResource("23_fsmkg")
 
 [node name="TextureRect" type="TextureRect" parent="SkillTree/Contents/Button2/Panel" unique_id=601153]
 layout_mode = 1
@@ -526,7 +519,7 @@ offset_right = 59.0
 offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("10_lflme")
-text = "ATTACK UPGRADES"
+text = "HEALTH UPGRADES"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SkillTree/Contents/Button2/Panel" unique_id=813258850]
 layout_mode = 1
@@ -593,7 +586,7 @@ offset_bottom = 147.80487
 texture = ExtResource("15_ku8hh")
 expand_mode = 1
 
-[node name="Purchase Attack" type="Button" parent="SkillTree/Contents/Button2/Panel" unique_id=1329418007]
+[node name="Purchase health" type="Button" parent="SkillTree/Contents/Button2/Panel" unique_id=1329418007]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -608,9 +601,9 @@ grow_vertical = 0
 icon = ExtResource("16_hf5xf")
 flat = true
 expand_icon = true
-script = ExtResource("17_thl5e")
+script = ExtResource("24_fsmkg")
 
-[node name="Label" type="Label" parent="SkillTree/Contents/Button2/Panel/Purchase Attack" unique_id=1309420553]
+[node name="Label" type="Label" parent="SkillTree/Contents/Button2/Panel/Purchase health" unique_id=1309420553]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -661,7 +654,7 @@ script = ExtResource("21_0stnx")
 [connection signal="button_down" from="SkillTree/Contents/Button3/Panel/Purchase Dash" to="SkillTree/Contents/Button3/Panel/Purchase Dash" method="_on_button_down"]
 [connection signal="button_up" from="SkillTree/Contents/Button3/Panel/Purchase Dash" to="SkillTree/Contents/Button3/Panel/Purchase Dash" method="_on_button_up"]
 [connection signal="button_up" from="SkillTree/Contents/Button2" to="SkillTree/Contents/Button2" method="_on_button_up"]
-[connection signal="button_down" from="SkillTree/Contents/Button2/Panel/Purchase Attack" to="SkillTree/Contents/Button2/Panel/Purchase Attack" method="_on_button_down"]
-[connection signal="button_up" from="SkillTree/Contents/Button2/Panel/Purchase Attack" to="SkillTree/Contents/Button2/Panel/Purchase Attack" method="_on_button_up"]
+[connection signal="button_down" from="SkillTree/Contents/Button2/Panel/Purchase health" to="SkillTree/Contents/Button2/Panel/Purchase health" method="_on_button_down"]
+[connection signal="button_up" from="SkillTree/Contents/Button2/Panel/Purchase health" to="SkillTree/Contents/Button2/Panel/Purchase health" method="_on_button_up"]
 [connection signal="button_down" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_up"]

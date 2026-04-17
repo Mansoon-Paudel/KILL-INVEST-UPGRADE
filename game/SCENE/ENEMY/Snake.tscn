@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://eqd2bvpmun83"]
+
+[ext_resource type="Script" uid="uid://df8oldf73j3cc" path="res://SCRIPT/Enemy/snake.gd" id="1_hqkdf"]
+[ext_resource type="Texture2D" uid="uid://b5c58vcjdmsjx" path="res://ASSETS/Enemy/enemy/PNG/Snake/Death1.png" id="2_hqkdf"]
+[ext_resource type="Texture2D" uid="uid://c3lv4o0osatfs" path="res://ASSETS/Enemy/enemy/PNG/Snake/Death2.png" id="3_gojej"]
+[ext_resource type="Texture2D" uid="uid://d2u44bp1w2t36" path="res://ASSETS/Enemy/enemy/PNG/Snake/Death3.png" id="4_ksi1a"]
+[ext_resource type="Texture2D" uid="uid://b5rp7swg2fjrh" path="res://ASSETS/Enemy/enemy/PNG/Snake/Death4.png" id="5_ffla5"]
+[ext_resource type="Texture2D" uid="uid://c5d8yma701w0d" path="res://ASSETS/Enemy/enemy/PNG/Snake/Attack1.png" id="6_1n1f0"]
+[ext_resource type="Texture2D" uid="uid://dtm87fny0ahq3" path="res://ASSETS/Enemy/enemy/PNG/Snake/Attack2.png" id="7_3qt04"]
+[ext_resource type="Texture2D" uid="uid://cog241i5qi6da" path="res://ASSETS/Enemy/enemy/PNG/Snake/Attack3.png" id="8_i8s7y"]
+[ext_resource type="Texture2D" uid="uid://c7b2orlp6uxhu" path="res://ASSETS/Enemy/enemy/PNG/Snake/Attack4.png" id="9_5kjs8"]
+[ext_resource type="Texture2D" uid="uid://bd7ya446kecee" path="res://ASSETS/Enemy/enemy/PNG/Snake/Hurt1.png" id="10_m2rco"]
+[ext_resource type="Texture2D" uid="uid://cyqjaq18wbpq6" path="res://ASSETS/Enemy/enemy/PNG/Snake/Hurt2.png" id="11_ixmt5"]
+[ext_resource type="Texture2D" uid="uid://bsfrt2c178j8o" path="res://ASSETS/Enemy/enemy/PNG/Snake/Idle1.png" id="12_udpew"]
+[ext_resource type="Texture2D" uid="uid://df70x4d3jj24m" path="res://ASSETS/Enemy/enemy/PNG/Snake/Idle2.png" id="13_qahyd"]
+[ext_resource type="Texture2D" uid="uid://b531ap6g7gbae" path="res://ASSETS/Enemy/enemy/PNG/Snake/Idle3.png" id="14_o4fb7"]
+[ext_resource type="Texture2D" uid="uid://d0qwlkxxercka" path="res://ASSETS/Enemy/enemy/PNG/Snake/Idle4.png" id="15_ya7ub"]
+[ext_resource type="Texture2D" uid="uid://d3hvnkoj1nm0l" path="res://ASSETS/Enemy/enemy/PNG/Snake/Walk1.png" id="16_h3e2m"]
+[ext_resource type="Texture2D" uid="uid://df5opjpm4t2fu" path="res://ASSETS/Enemy/enemy/PNG/Snake/Walk2.png" id="17_a286s"]
+[ext_resource type="Texture2D" uid="uid://bpee67k60eq8g" path="res://ASSETS/Enemy/enemy/PNG/Snake/Walk3.png" id="18_8q4p6"]
+[ext_resource type="Texture2D" uid="uid://cgy8fsridpcm8" path="res://ASSETS/Enemy/enemy/PNG/Snake/Walk4.png" id="19_dv7jv"]
+[ext_resource type="PackedScene" uid="uid://q04bymqypnpp" path="res://SCENE/hitbox.tscn" id="21_o1fgw"]
+[ext_resource type="Script" uid="uid://d123pjmhm2vg3" path="res://SCRIPT/Enemy/attack_zone.gd" id="22_owl5y"]
+[ext_resource type="Script" uid="uid://d1ioh0u1dtdyx" path="res://SCRIPT/Enemy/detection_zone.gd" id="23_apbij"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kobn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hqkdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gojej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ksi1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ffla5")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1n1f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3qt04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_i8s7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5kjs8")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_m2rco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ixmt5")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_udpew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qahyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_o4fb7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ya7ub")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_h3e2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_a286s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8q4p6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dv7jv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otmlh"]
+size = Vector2(93, 69)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lmpi2"]
+radius = 43.997894
+height = 122.01373
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_atvc4"]
+radius = 90.27181
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f1ce4"]
+radius = 188.0
+
+[node name="Snake" type="CharacterBody2D" unique_id=885736534]
+script = ExtResource("1_hqkdf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=751838751]
+texture_filter = 1
+position = Vector2(7.0000005, -30.000002)
+scale = Vector2(1.0234375, 0.99242425)
+sprite_frames = SubResource("SpriteFrames_kobn3")
+animation = &"walk"
+frame_progress = 0.7135843
+flip_h = true
+
+[node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
+position = Vector2(-19, -30.5)
+shape = SubResource("RectangleShape2D_otmlh")
+disabled = true
+
+[node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
+position = Vector2(41, -31)
+shape = SubResource("RectangleShape2D_otmlh")
+
+[node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("21_o1fgw")]
+position = Vector2(-12, 0)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
+position = Vector2(30.000002, -24)
+rotation = 1.5610062
+shape = SubResource("CapsuleShape2D_lmpi2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1578546152]
+
+[node name="Attackzone" type="Area2D" parent="." unique_id=290527920]
+position = Vector2(-431, 106)
+script = ExtResource("22_owl5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
+position = Vector2(431, -106)
+shape = SubResource("CircleShape2D_atvc4")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=526359210]
+position = Vector2(-431, 106)
+script = ExtResource("23_apbij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=459911291]
+position = Vector2(431, -106)
+shape = SubResource("CircleShape2D_f1ce4")
+
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]
+[connection signal="body_exited" from="Attackzone" to="Attackzone" method="_on_body_exited"]
+[connection signal="body_entered" from="DetectionZone" to="DetectionZone" method="_on_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="DetectionZone" method="_on_body_exited"]

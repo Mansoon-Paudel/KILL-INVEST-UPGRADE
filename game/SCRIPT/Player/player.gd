@@ -13,7 +13,8 @@ var coyote_timer = 0.0
 var is_attacking = false
 var is_dead = false
 var is_invincible = false
-
+var current_dashes: int = 0
+var dash_refresh_timer: float = 0.0
 var health = 0
 var footstep_index = 0
 var footstep_cooldown = 0.0
@@ -39,11 +40,11 @@ const FOOTSTEP_SOUNDS = [
 ]
 
 func _ready() -> void:
+	current_dashes = GameState.dashNum  
 	player.position = GameState.player_position
 	player_attack.monitoring = false
 	player_attack.monitorable = false
 	apply_upgrades()
-
 func apply_upgrades() -> void:
 	health = GameState.health
 
@@ -60,20 +61,26 @@ func _physics_process(delta: float) -> void:
 		coyote_timer -= delta
 	else:
 		coyote_timer = COYOTE_TIME
-
-	# Tick dash timer
+	if current_dashes < GameState.dashNum:
+		dash_refresh_timer -= delta
+		if dash_refresh_timer <= 0.0:
+			current_dashes += 1
+			dash_refresh_timer = GameState.dash_cooldown
 	if dashing:
 		dash_timer -= delta
 		if dash_timer <= 0.0:
 			dashing = false
 			dash_timer = 0.0
 
-	if Input.is_action_just_pressed("Dash") and not dashing and not is_attacking:
+	# Dash input
+	if Input.is_action_just_pressed("Dash") and not dashing and not is_attacking and current_dashes > 0:
 		var dir := Input.get_axis("Left", "Right")
 		if dir != 0:
 			dashing = true
 			dash_timer = DASH_DURATION
 			dash_direction = dir
+			current_dashes -= 1                     
+			dash_refresh_timer = GameState.dash_cooldown
 
 	if Input.is_action_just_pressed("Up"):
 		if is_on_floor() or coyote_timer > 0.0:

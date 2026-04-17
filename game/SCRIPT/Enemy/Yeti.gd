@@ -8,7 +8,7 @@ enum State {
 }
 @export var speed: float = 100
 @export var gravity: float = 900
-@export var health = 3
+@export var health = 6
 @export var knockback_force = 100
 @export var stun_duration = 0.5
 var current_state = State.IDLE
@@ -73,7 +73,7 @@ func attack():
 	sprite.play("attack")
 	await sprite.animation_finished
 	if can_attack and player != null:
-		player.take_damage(1)
+		player.take_damage(2)
 	is_attacking = false
 	if can_attack and player != null:
 		current_state = State.ATTACK
