@@ -15,10 +15,10 @@ func _on_button_down() -> void:
 
 func _on_button_up() -> void:
 	button.icon = load("res://ASSETS/UI/Sliced Images/Part_4/Actions Bar/button_gray.png")
-	if GameState.Coin >= 2:
+	if GameState.Coin >= 2 and GameState.Crystal >=1:
 		GameState.damage +=1
 		GameState.Coin -= 2
-		GameState.Crystal -= 2
+		GameState.Crystal -= 1
 		get_tree().reload_current_scene()
 		
 	

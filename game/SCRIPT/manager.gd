@@ -3,7 +3,7 @@ extends Node
 
 
 func _on_button_3_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://SCENE/Shop.tscn")
 
 
 func _on_button_2_pressed() -> void:

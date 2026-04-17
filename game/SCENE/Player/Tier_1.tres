@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c2ul0hul61tjf" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_attack_without_shadow.png" id="1_y72i0"]
 [ext_resource type="Texture2D" uid="uid://bblch2o736s34" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Idle_without_shadow.png" id="2_g0453"]
+[ext_resource type="Texture2D" uid="uid://byn1y0nmqtudu" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Run_Attack_without_shadow.png" id="2_kmyv1"]
 [ext_resource type="Texture2D" uid="uid://dvaygu8dfclx2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_Attack_without_shadow.png" id="3_i36rg"]
 [ext_resource type="Texture2D" uid="uid://bqaukn48dj821" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Run_without_shadow.png" id="4_r5bq6"]
 [ext_resource type="Texture2D" uid="uid://rodca3kfvdj2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_without_shadow.png" id="5_gqm6d"]
@@ -37,6 +38,10 @@ region = Rect2(384, 128, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_h2ipx"]
 atlas = ExtResource("1_y72i0")
 region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5khot"]
+atlas = ExtResource("2_kmyv1")
+region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2qa7"]
 atlas = ExtResource("2_g0453")
@@ -173,6 +178,14 @@ animations = [{
 "loop": false,
 "name": &"Attack",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5khot")
+}],
+"loop": true,
+"name": &"Dash",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,

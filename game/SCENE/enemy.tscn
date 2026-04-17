@@ -110,27 +110,28 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otmlh"]
-size = Vector2(85, 44)
+size = Vector2(93, 44)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl1t2"]
-size = Vector2(46.487293, 81.99606)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lmpi2"]
+radius = 33.98858
+height = 122.01373
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atvc4"]
 radius = 90.27181
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_otmlh"]
-radius = 170.29973
+[sub_resource type="CircleShape2D" id="CircleShape2D_f1ce4"]
+radius = 188.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=885736534]
 script = ExtResource("1_7s3rj")
-health = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=751838751]
 texture_filter = 1
 position = Vector2(-3, -27)
 scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_kobn3")
-animation = &"hurt"
+animation = &"walk"
+flip_h = true
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
 position = Vector2(-17, -4)
@@ -138,7 +139,7 @@ shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
-position = Vector2(12.5, -4)
+position = Vector2(8.5, -4)
 shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("5_lf0sp")]
@@ -147,30 +148,30 @@ collision_layer = 1
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
-position = Vector2(24.49045, -3.9754298)
+position = Vector2(23, -6)
 rotation = 1.5610062
-shape = SubResource("RectangleShape2D_rl1t2")
+shape = SubResource("CapsuleShape2D_lmpi2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1578546152]
 
-[node name="DetectionZone" type="Area2D" parent="." unique_id=290527920]
-position = Vector2(-431, 106)
-script = ExtResource("11_iftbg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1197730915]
-position = Vector2(431, -106)
-shape = SubResource("CircleShape2D_atvc4")
-
-[node name="AttackZone" type="Area2D" parent="." unique_id=533653612]
+[node name="Attackzone" type="Area2D" parent="." unique_id=290527920]
 position = Vector2(-431, 106)
 script = ExtResource("12_rppbq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=294269170]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
 position = Vector2(431, -106)
-shape = SubResource("CircleShape2D_otmlh")
+shape = SubResource("CircleShape2D_atvc4")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=526359210]
+position = Vector2(-431, 106)
+script = ExtResource("11_iftbg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=459911291]
+position = Vector2(431, -106)
+shape = SubResource("CircleShape2D_f1ce4")
 
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]
+[connection signal="body_exited" from="Attackzone" to="Attackzone" method="_on_body_exited"]
 [connection signal="body_entered" from="DetectionZone" to="DetectionZone" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="DetectionZone" method="_on_body_exited"]
-[connection signal="body_entered" from="AttackZone" to="AttackZone" method="_on_body_entered"]
-[connection signal="body_exited" from="AttackZone" to="AttackZone" method="_on_body_exited"]

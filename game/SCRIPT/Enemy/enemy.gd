@@ -1,5 +1,5 @@
+# enemy.gd
 extends CharacterBody2D
-
 enum State {
 	IDLE,
 	CHASE,
@@ -7,31 +7,23 @@ enum State {
 	STUN,
 	DEAD
 }
-
 @export var speed: float = 100
-@export var gravity = 900
+@export var gravity: float = 900
 @export var health = 3
-@export var knockback_force = 200
+@export var knockback_force = 100
 @export var stun_duration = 0.5
-
 var current_state = State.IDLE
 var player = null
 var can_attack = false
 var is_attacking = false
 var is_stunned = false
-var knockback_velocity = Vector2.ZERO  # was float, must be Vector2
-
+var is_dying = false
+var knockback_velocity = Vector2.ZERO
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection = $DetectionZone
 @onready var attack_zone = $AttackZone
-
-func _ready() -> void:
-	detection.body_entered.connect(_on_detection_entered)
-	detection.body_exited.connect(_on_detection_exited)
-	attack_zone.body_entered.connect(_on_attack_zone_entered)
-	attack_zone.body_exited.connect(_on_attack_zone_exited)
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -55,7 +47,7 @@ func state_machine(delta):
 		State.ATTACK:
 			attack()
 		State.STUN:
-			velocity.x = move_toward(velocity.x, 0, knockback_force * delta)  # decelerate
+			velocity.x = move_toward(velocity.x, 0, knockback_force * delta)
 		State.DEAD:
 			die()
 
@@ -84,12 +76,18 @@ func attack():
 	if can_attack and player != null:
 		player.take_damage(1)
 	is_attacking = false
-	current_state = State.CHASE
+	# Return to chase if player is still around, otherwise idle
+	if can_attack and player != null:
+		current_state = State.ATTACK
+	elif player != null:
+		current_state = State.CHASE
+	else:
+		current_state = State.IDLE
 
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
-	health -= amount  # was inside the return block by mistake!
+	health -= amount
 	if health <= 0:
 		current_state = State.DEAD
 	else:
@@ -102,43 +100,20 @@ func stun(from_position: Vector2):
 	is_stunned = true
 	current_state = State.STUN
 	var direction = (global_position - from_position).normalized()
-	velocity = direction * knockback_force  # apply knockback immediately
+	velocity = direction * knockback_force
 	sprite.play("hurt")
 	await sprite.animation_finished
 	is_stunned = false
-	current_state = State.CHASE  # go back to chase not attack after stun
+	current_state = State.CHASE
 
 func die():
-	if current_state != State.DEAD:
+	if is_dying:
 		return
+	is_dying = true
 	sprite.play("Die")
-	set_physics_process(false)  # stop movement while dying
+	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
 	GameState.Kill += 1
+	GameState.Coin += 2
+	GameState.Crystal += 1
 	queue_free()
-
-# Detection zone signals
-func _on_detection_entered(body):
-	if body is Player:
-		player = body
-		if current_state == State.IDLE:
-			current_state = State.CHASE
-
-func _on_detection_exited(body):
-	if body is Player:
-		player = null
-		if not is_stunned:
-			current_state = State.IDLE
-
-# Attack zone signals
-func _on_attack_zone_entered(body):
-	if body is Player:
-		can_attack = true
-		if current_state == State.CHASE:
-			current_state = State.ATTACK
-
-func _on_attack_zone_exited(body):
-	if body is Player:
-		can_attack = false
-		if current_state == State.ATTACK and not is_attacking:
-			current_state = State.CHASE

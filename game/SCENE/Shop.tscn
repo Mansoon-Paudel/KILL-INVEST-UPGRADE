@@ -1,3 +1,173 @@
 [gd_scene format=3 uid="uid://bura0ma773e6i"]
 
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="1_jbfa4"]
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="2_vgo34"]
+[ext_resource type="FontFile" uid="uid://cylrbhu8kbjr2" path="res://ASSETS/FONT/Tomorrow/Tomorrow-BoldItalic.ttf" id="3_10yfy"]
+[ext_resource type="FontFile" uid="uid://kcd5a3wne5yo" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBoldItalic.ttf" id="3_li75j"]
+[ext_resource type="Texture2D" uid="uid://bblch2o736s34" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Idle_without_shadow.png" id="4_j3buq"]
+[ext_resource type="Texture2D" uid="uid://ct771aah0y6ci" path="res://ASSETS/character/PNG/Swordsman_lvl2/Without_shadow/Swordsman_lvl2_Idle_without_shadow.png" id="5_li75j"]
+[ext_resource type="Texture2D" uid="uid://loyyjkbwyh25" path="res://ASSETS/UI/Sliced Images/Part_5/Talents/talents_arrow_01.png" id="6_tg48p"]
+[ext_resource type="FontFile" uid="uid://dud4cwhkrg1sc" path="res://ASSETS/FONT/Tomorrow/Tomorrow-MediumItalic.ttf" id="6_vgo34"]
+[ext_resource type="Texture2D" uid="uid://dqd45fqutl82p" path="res://ASSETS/UI/Sliced Images/Part_4/Actions Bar/button_gray-HOVER.png" id="7_tg48p"]
+[ext_resource type="Script" uid="uid://de1nr6vknmas3" path="res://SCRIPT/Player/upgrade.gd" id="8_2ifnn"]
+[ext_resource type="Texture2D" uid="uid://csmcuj8in65p4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_header_close.png" id="10_2ifnn"]
+[ext_resource type="Script" uid="uid://inyab2pb808b" path="res://SCRIPT/close.gd" id="11_uyfl2"]
+
 [node name="Shop" type="Node" unique_id=1142458995]
+
+[node name="BG" type="TextureRect" parent="." unique_id=1387607740]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jbfa4")
+expand_mode = 1
+
+[node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("2_vgo34")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=545407013]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=506623264]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -241.0
+offset_right = 188.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_li75j")
+theme_override_font_sizes/font_size = 64
+text = "UPGRADES"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=1933105339]
+texture_filter = 1
+position = Vector2(299, 297.62497)
+scale = Vector2(8.26953, 8.26953)
+texture = ExtResource("4_j3buq")
+region_enabled = true
+region_rect = Rect2(256, 0, 64, 64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer" unique_id=540746861]
+texture_filter = 1
+position = Vector2(890, 297.62497)
+scale = Vector2(8.26953, 8.26953)
+texture = ExtResource("5_li75j")
+region_enabled = true
+region_rect = Rect2(256, 0, 64, 64)
+
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=205583511]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = 99.0
+offset_right = 200.5
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_vgo34")
+theme_override_font_sizes/font_size = 24
+text = "Damage +2, Speed: +70, health +3"
+
+[node name="Label3" type="Label" parent="CanvasLayer" unique_id=1180638177]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = 165.0
+offset_right = 200.5
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_vgo34")
+theme_override_font_sizes/font_size = 24
+text = "REQUIRED KILLS: X/2"
+horizontal_alignment = 1
+
+[node name="UPGRADE" type="Button" parent="CanvasLayer" unique_id=1409090794]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -135.0
+offset_top = -140.0
+offset_right = 135.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+icon = ExtResource("7_tg48p")
+flat = true
+expand_icon = true
+script = ExtResource("8_2ifnn")
+
+[node name="Label" type="Label" parent="CanvasLayer/UPGRADE" unique_id=1193579236]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -11.5
+offset_right = 36.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_10yfy")
+theme_override_font_sizes/font_size = 36
+text = "UPGRADE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="Button" parent="CanvasLayer" unique_id=2053490758]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 5.0
+offset_right = -17.354858
+offset_bottom = 59.0
+grow_horizontal = 0
+icon = ExtResource("10_2ifnn")
+flat = true
+expand_icon = true
+script = ExtResource("11_uyfl2")
+
+[node name="TalentsArrow01" type="TextureRect" parent="." unique_id=787266040]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -92.0
+offset_right = -62.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.1607144, 3.1607141)
+texture = ExtResource("6_tg48p")
+
+[connection signal="button_down" from="CanvasLayer/UPGRADE" to="CanvasLayer/UPGRADE" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/UPGRADE" to="CanvasLayer/UPGRADE" method="_on_button_up"]
+[connection signal="button_down" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/Close" to="CanvasLayer/Close" method="_on_button_up"]
