@@ -30,10 +30,8 @@ var jumps_remaining: int = 0
 @onready var rgt: CollisionShape2D = $PlayerAttack/CollisionShape2D_rgt
 @onready var lft: CollisionShape2D = $PlayerAttack/CollisionShape2D_lft
 @onready var death: Panel = $"../CanvasLayer/DEATH"
-
 const jmp = preload("res://ASSETS/SOUNDS/SFX/Player/jump.ogg")
 const slice = preload("res://ASSETS/SOUNDS/SFX/Player/slice.wav")
-
 const FOOTSTEP_SOUNDS = [
 	preload("res://ASSETS/SOUNDS/SFX/Player/footstep00.ogg"),
 	preload("res://ASSETS/SOUNDS/SFX/Player/footstep01.ogg"),
@@ -41,7 +39,6 @@ const FOOTSTEP_SOUNDS = [
 	preload("res://ASSETS/SOUNDS/SFX/Player/footstep03.ogg"),
 	preload("res://ASSETS/SOUNDS/SFX/Player/footstep04.ogg")
 ]
-
 func _ready() -> void:
 	current_dashes = GameState.dashNum
 	jumps_remaining = GameState.jumpNum
@@ -50,7 +47,6 @@ func _ready() -> void:
 	player_attack.monitorable = false
 	death.hide()
 	apply_upgrades()
-
 func apply_upgrades() -> void:
 	health = GameState.health
 	if GameState.tier == 1:
@@ -59,20 +55,15 @@ func apply_upgrades() -> void:
 		sprite2D.sprite_frames = preload("res://SCENE/Player/Tier_2.tres")
 	elif GameState.tier == 3:
 		sprite2D.sprite_frames = preload("res://SCENE/Player/Tier_3.tres")
-
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
-
-	# Gravity and coyote
 	if is_on_floor():
 		jumps_remaining = GameState.jumpNum
 		coyote_timer = COYOTE_TIME
 	else:
 		velocity += get_gravity() * delta
 		coyote_timer -= delta
-
-	# Dash refresh
 	if current_dashes < GameState.dashNum:
 		dash_refresh_timer -= delta
 		if dash_refresh_timer <= 0.0:
@@ -87,8 +78,6 @@ func _physics_process(delta: float) -> void:
 			dashing = false
 			dash_timer = 0.0
 			velocity.x = move_toward(velocity.x, 0, 200)
-
-	# Jump
 	if Input.is_action_just_pressed("Up"):
 		if is_on_floor() or coyote_timer > 0.0:
 			velocity.y = JUMP_VELOCITY
@@ -101,8 +90,6 @@ func _physics_process(delta: float) -> void:
 			jumps_remaining -= 1
 			jump_player.stream = jmp
 			jump_player.play()
-
-	# Dash input
 	if Input.is_action_just_pressed("Dash") and not dashing and not is_attacking and current_dashes > 0:
 		var dir := Input.get_axis("Left", "Right")
 		if dir != 0:
@@ -111,12 +98,8 @@ func _physics_process(delta: float) -> void:
 			dash_direction = dir
 			current_dashes -= 1
 			dash_refresh_timer = GameState.dash_cooldown
-
-	# Attack input
 	if Input.is_action_just_pressed("Attack") and not is_attacking and not is_invincible:
 		Start_attack()
-
-	# Movement
 	if not is_attacking:
 		if dashing:
 			velocity.x = dash_direction * GameState.Dash_Speed

@@ -5,8 +5,9 @@ extends Node
 func _on_button_3_pressed() -> void:
 	get_tree().change_scene_to_file("res://SCENE/Shop.tscn")
 
-
-func _on_button_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://SCENE/world.tscn")
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://SCENE/Skill-tree.tscn")
+
+
+func _on_button_2_button_up() -> void:
+	get_tree().change_scene_to_file("res://SCENE/world.tscn")
