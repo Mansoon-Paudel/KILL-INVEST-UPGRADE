@@ -1,5 +1,5 @@
 class_name manager extends Node
-var speed = 150
+var speed = 170
 var player: Player
 var health = 5
 var dashNum = 0

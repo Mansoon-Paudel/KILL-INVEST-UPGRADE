@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1tacj5o40slc"]
 
 [ext_resource type="Script" uid="uid://dloca2qnnldhm" path="res://SCRIPT/btnmanager.gd" id="1_cy65s"]
+[ext_resource type="Texture2D" uid="uid://b5rd4dk71jgk3" path="res://ASSETS/Map/map.png" id="2_nqtom"]
 [ext_resource type="Texture2D" uid="uid://5ni6dkms3iq1" path="res://ASSETS/Map/TileSet.png" id="2_y85ie"]
 [ext_resource type="Script" uid="uid://bjp228pqiijde" path="res://SCRIPT/LevelTileMap.gd" id="3_nqtom"]
 [ext_resource type="PackedScene" uid="uid://c6qcdb56tu6wk" path="res://SCENE/Player.tscn" id="4_65lgn"]
@@ -222,7 +223,8 @@ offset_bottom = 689.9073
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-texture = SubResource("CompressedTexture2D_scw50")
+texture = ExtResource("2_nqtom")
+expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1874719852]
 anchors_preset = 15
@@ -235,7 +237,8 @@ offset_bottom = 689.9073
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-texture = SubResource("CompressedTexture2D_scw50")
+texture = ExtResource("2_nqtom")
+expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=1558085748]
 anchors_preset = 15
@@ -248,7 +251,8 @@ offset_bottom = 689.9073
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-texture = SubResource("CompressedTexture2D_scw50")
+texture = ExtResource("2_nqtom")
+expand_mode = 1
 
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=1818499729]
 anchors_preset = 15
