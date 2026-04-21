@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 		death_panel.show()
 
 func _on_button_2_button_up() -> void:
-	_reset_and_go("res://SCENE/world.tscn")
+	_reset_and_go("res://SCENE/workd/world.tscn")
 
 func _on_button_3_button_up() -> void:
 	_reset_and_go("res://SCENE/Shop.tscn")
