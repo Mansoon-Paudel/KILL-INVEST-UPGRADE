@@ -3,6 +3,7 @@ var speed = 150
 var player: Player
 var health = 5
 var dashNum = 0
+var jumpNum = 2
 var dash_cooldown: float = 2
 var Coin = 100
 var Crystal = 100
@@ -16,6 +17,7 @@ var current_tilemap_bounds: Array[Vector2]
 var tier: int = 1
 var Dash_Speed = speed+300
 signal TileMapBoundsChanged(bounds: Array[Vector2])
+var player_dead: bool = false
 const TIER_SPRITES = [
 	preload("res://SCENE/Player/Tier_1.tres"),
 	preload("res://SCENE/Player/Tier_2.tres"),

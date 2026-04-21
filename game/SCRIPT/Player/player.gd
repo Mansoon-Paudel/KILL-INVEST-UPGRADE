@@ -3,12 +3,13 @@ extends CharacterBody2D
 
 const JUMP_VELOCITY = -450.0
 const COYOTE_TIME = 0.13
-const INVINCIBILITY_DURATION = 0.8
+const INVINCIBILITY_DURATION = 0.5
 const FOOTSTEP_DELAY = 0.5
+const DASH_DURATION = 0.35
+var is_hurt = false
 var dashing = false
 var dash_timer = 0.0
 var dash_direction = 0.0
-const DASH_DURATION = 0.35
 var coyote_timer = 0.0
 var is_attacking = false
 var is_dead = false
@@ -18,6 +19,7 @@ var dash_refresh_timer: float = 0.0
 var health = 0
 var footstep_index = 0
 var footstep_cooldown = 0.0
+var jumps_remaining: int = 0
 
 @onready var sprite2D: AnimatedSprite2D = $AnimatedSprite2D
 @onready var footstep_player: AudioStreamPlayer = $"Footstep Stream"
@@ -27,6 +29,7 @@ var footstep_cooldown = 0.0
 @onready var player: Player = $"."
 @onready var rgt: CollisionShape2D = $PlayerAttack/CollisionShape2D_rgt
 @onready var lft: CollisionShape2D = $PlayerAttack/CollisionShape2D_lft
+@onready var death: Panel = $"../CanvasLayer/DEATH"
 
 const jmp = preload("res://ASSETS/SOUNDS/SFX/Player/jump.ogg")
 const slice = preload("res://ASSETS/SOUNDS/SFX/Player/slice.wav")
@@ -40,14 +43,16 @@ const FOOTSTEP_SOUNDS = [
 ]
 
 func _ready() -> void:
-	current_dashes = GameState.dashNum  
+	current_dashes = GameState.dashNum
+	jumps_remaining = GameState.jumpNum
 	player.position = GameState.player_position
 	player_attack.monitoring = false
 	player_attack.monitorable = false
+	death.hide()
 	apply_upgrades()
+
 func apply_upgrades() -> void:
 	health = GameState.health
-
 	if GameState.tier == 1:
 		sprite2D.sprite_frames = preload("res://SCENE/Player/Tier_1.tres")
 	elif GameState.tier == 2:
@@ -56,21 +61,46 @@ func apply_upgrades() -> void:
 		sprite2D.sprite_frames = preload("res://SCENE/Player/Tier_3.tres")
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if is_dead:
+		return
+
+	# Gravity and coyote
+	if is_on_floor():
+		jumps_remaining = GameState.jumpNum
+		coyote_timer = COYOTE_TIME
+	else:
 		velocity += get_gravity() * delta
 		coyote_timer -= delta
-	else:
-		coyote_timer = COYOTE_TIME
+
+	# Dash refresh
 	if current_dashes < GameState.dashNum:
 		dash_refresh_timer -= delta
 		if dash_refresh_timer <= 0.0:
 			current_dashes += 1
-			dash_refresh_timer = GameState.dash_cooldown
+			if current_dashes < GameState.dashNum:
+				dash_refresh_timer = GameState.dash_cooldown
+
+	# Dash tick
 	if dashing:
 		dash_timer -= delta
 		if dash_timer <= 0.0:
 			dashing = false
 			dash_timer = 0.0
+			velocity.x = move_toward(velocity.x, 0, 200)
+
+	# Jump
+	if Input.is_action_just_pressed("Up"):
+		if is_on_floor() or coyote_timer > 0.0:
+			velocity.y = JUMP_VELOCITY
+			coyote_timer = 0.0
+			jumps_remaining = GameState.jumpNum - 1
+			jump_player.stream = jmp
+			jump_player.play()
+		elif jumps_remaining > 0:
+			velocity.y = JUMP_VELOCITY
+			jumps_remaining -= 1
+			jump_player.stream = jmp
+			jump_player.play()
 
 	# Dash input
 	if Input.is_action_just_pressed("Dash") and not dashing and not is_attacking and current_dashes > 0:
@@ -79,19 +109,14 @@ func _physics_process(delta: float) -> void:
 			dashing = true
 			dash_timer = DASH_DURATION
 			dash_direction = dir
-			current_dashes -= 1                     
+			current_dashes -= 1
 			dash_refresh_timer = GameState.dash_cooldown
 
-	if Input.is_action_just_pressed("Up"):
-		if is_on_floor() or coyote_timer > 0.0:
-			velocity.y = JUMP_VELOCITY
-			coyote_timer = 0.0
-			jump_player.stream = jmp
-			jump_player.play()
-
-	if Input.is_action_just_pressed("Attack") and not is_attacking:
+	# Attack input
+	if Input.is_action_just_pressed("Attack") and not is_attacking and not is_invincible:
 		Start_attack()
 
+	# Movement
 	if not is_attacking:
 		if dashing:
 			velocity.x = dash_direction * GameState.Dash_Speed
@@ -111,7 +136,6 @@ func _physics_process(delta: float) -> void:
 func Handle_footsteps(delta: float) -> void:
 	if is_on_floor() and abs(velocity.x) > 1 and not is_attacking:
 		footstep_cooldown -= delta
-
 		if not footstep_player.playing and footstep_cooldown <= 0.0:
 			footstep_player.stream = FOOTSTEP_SOUNDS[footstep_index]
 			footstep_player.play()
@@ -125,9 +149,7 @@ func Start_attack() -> void:
 	is_attacking = true
 	player_attack.monitoring = true
 	player_attack.monitorable = true
-
 	sprite2D.play("Attack")
-
 	await get_tree().create_timer(0.2).timeout
 	attack_player.stream = slice
 	attack_player.play()
@@ -140,32 +162,36 @@ func Start_attack() -> void:
 func take_damage(amount: int) -> void:
 	if is_invincible or is_dead:
 		return
-
 	health -= amount
-	print("Player health: ", health)
-
+	GameState.health = health
 	if health <= 0:
 		die()
 		return
-
+	is_hurt = true
+	is_attacking = false  
+	player_attack.monitoring = false
+	player_attack.monitorable = false
 	is_invincible = true
-
+	sprite2D.play("Hurt")
+	await sprite2D.animation_finished
+	is_hurt = false
 	for i in range(4):
 		sprite2D.modulate.a = 0.2
 		await get_tree().create_timer(0.1).timeout
 		sprite2D.modulate.a = 1.0
 		await get_tree().create_timer(0.1).timeout
-
 	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
 	is_invincible = false
-
+	sprite2D.modulate.a = 1.0
 func die() -> void:
 	if is_dead:
 		return
-
 	is_dead = true
-	print("Player died")
-	get_tree().reload_current_scene()
+	sprite2D.play("Death")
+	await sprite2D.animation_finished
+	GameState.player_dead = true
+	queue_free()
+
 func UpdateAnimation() -> void:
 	if velocity.x > 1:
 		sprite2D.flip_h = false
@@ -176,13 +202,13 @@ func UpdateAnimation() -> void:
 		lft.disabled = false
 		rgt.disabled = true
 
+	if is_hurt:     
+		return
 	if is_attacking:
 		return
-
 	if dashing:
-		sprite2D.play("Dash")  
+		sprite2D.play("Dash")
 		return
-
 	if not is_on_floor():
 		sprite2D.play("Jump")
 	elif abs(velocity.x) > 1:

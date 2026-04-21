@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bblch2o736s34" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Idle_without_shadow.png" id="2_g0453"]
 [ext_resource type="Texture2D" uid="uid://byn1y0nmqtudu" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Run_Attack_without_shadow.png" id="2_kmyv1"]
 [ext_resource type="Texture2D" uid="uid://dvaygu8dfclx2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_Attack_without_shadow.png" id="3_i36rg"]
+[ext_resource type="Texture2D" uid="uid://dcrnlg0or0dfd" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Death_without_shadow.png" id="3_syu8w"]
+[ext_resource type="Texture2D" uid="uid://cnrt0tv26wahc" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Hurt_without_shadow.png" id="4_kfbmy"]
 [ext_resource type="Texture2D" uid="uid://bqaukn48dj821" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Run_without_shadow.png" id="4_r5bq6"]
 [ext_resource type="Texture2D" uid="uid://rodca3kfvdj2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_without_shadow.png" id="5_gqm6d"]
 
@@ -42,6 +44,54 @@ region = Rect2(448, 128, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5khot"]
 atlas = ExtResource("2_kmyv1")
 region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85rpd"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrjdq"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8jc1"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyvmx"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mdf2"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oojb7"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb1y6"]
+atlas = ExtResource("3_syu8w")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ktfj"]
+atlas = ExtResource("4_kfbmy")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db4ho"]
+atlas = ExtResource("4_kfbmy")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5vam"]
+atlas = ExtResource("4_kfbmy")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8dih"]
+atlas = ExtResource("4_kfbmy")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5anxv"]
+atlas = ExtResource("4_kfbmy")
+region = Rect2(256, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2qa7"]
 atlas = ExtResource("2_g0453")
@@ -186,6 +236,52 @@ animations = [{
 "loop": true,
 "name": &"Dash",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85rpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrjdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8jc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyvmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mdf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oojb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb1y6")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ktfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db4ho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5vam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8dih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5anxv")
+}],
+"loop": false,
+"name": &"Hurt",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

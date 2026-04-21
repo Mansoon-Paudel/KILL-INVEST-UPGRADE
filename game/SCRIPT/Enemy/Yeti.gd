@@ -8,7 +8,7 @@ enum State {
 }
 @export var speed: float = 100
 @export var gravity: float = 900
-@export var health = 6
+@export var health = 4
 @export var knockback_force = 100
 @export var stun_duration = 0.5
 var current_state = State.IDLE
@@ -73,7 +73,7 @@ func attack():
 	sprite.play("attack")
 	await sprite.animation_finished
 	if can_attack and player != null:
-		player.take_damage(2)
+		player.take_damage(1.5)
 	is_attacking = false
 	if can_attack and player != null:
 		current_state = State.ATTACK
@@ -85,6 +85,7 @@ func attack():
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
+
 	health -= amount
 	if health <= 0:
 		current_state = State.DEAD
@@ -100,6 +101,10 @@ func stun(from_position: Vector2):
 	var direction = (global_position - from_position).normalized()
 	velocity = direction * knockback_force
 	sprite.play("hurt")
+	await get_tree().create_timer(0.35).timeout
+	get_tree().paused=true
+	await get_tree().create_timer(0.12).timeout
+	get_tree().paused=false
 	await sprite.animation_finished
 	is_stunned = false
 	current_state = State.CHASE

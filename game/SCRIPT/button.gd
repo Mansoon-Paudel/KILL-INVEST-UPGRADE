@@ -19,4 +19,3 @@ func _on_button_down() -> void:
 
 func _on_button_up() -> void:
 	button.icon = load("res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button.png")
-	get_tree().change_scene_to_file("res://SCENE/levels.tscn")

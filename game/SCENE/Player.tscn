@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6qcdb56tu6wk"]
 
 [ext_resource type="Script" uid="uid://b064qmm2dktuk" path="res://SCRIPT/Player/player.gd" id="1_s47mi"]
-[ext_resource type="SpriteFrames" uid="uid://p1l3cy78kalp" path="res://SCENE/Player/Tier_3.tres" id="2_m0ta0"]
+[ext_resource type="SpriteFrames" uid="uid://r7it65hyusfc" path="res://SCENE/Player/Tier_2.tres" id="2_m0ta0"]
 [ext_resource type="Script" uid="uid://btml073v01jnq" path="res://SCRIPT/Player/camera_2d.gd" id="3_m0ta0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s47mi"]
@@ -21,9 +21,7 @@ texture_filter = 1
 position = Vector2(-2, -6)
 scale = Vector2(1.4687499, 1.5460526)
 sprite_frames = ExtResource("2_m0ta0")
-animation = &"Attack"
-frame = 5
-frame_progress = 0.049086723
+animation = &"Death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954622635]
 position = Vector2(-1, -5)

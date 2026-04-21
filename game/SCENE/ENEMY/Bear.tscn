@@ -120,7 +120,7 @@ height = 122.01373
 radius = 90.27181
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f1ce4"]
-radius = 188.0
+radius = 716.58704
 
 [node name="Bear" type="CharacterBody2D" unique_id=885736534]
 script = ExtResource("1_7s3rj")

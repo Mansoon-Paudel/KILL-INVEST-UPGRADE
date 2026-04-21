@@ -2,8 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://crb82xmu8yuth" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_attack_without_shadow.png" id="1_icv7t"]
 [ext_resource type="Texture2D" uid="uid://l608qk2fbj4c" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_Idle_without_shadow.png" id="2_dn6nw"]
+[ext_resource type="Texture2D" uid="uid://bsmxvetj415at" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_Death_without_shadow.png" id="3_dn6nw"]
 [ext_resource type="Texture2D" uid="uid://dv5y7i7gp57nc" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_Run_Attack_without_shadow.png" id="3_y2pq0"]
 [ext_resource type="Texture2D" uid="uid://cxgwp2enkha7v" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_Run_without_shadow.png" id="4_k2hbg"]
+[ext_resource type="Texture2D" uid="uid://jre212wesf7r" path="res://ASSETS/character/PNG/Swordsman_lvl3/Without_shadow/Swordsman_lvl3_Hurt_without_shadow.png" id="4_y2pq0"]
 [ext_resource type="Texture2D" uid="uid://rodca3kfvdj2" path="res://ASSETS/character/PNG/Swordsman_lvl1/Without_shadow/Swordsman_lvl1_Walk_without_shadow.png" id="5_k2hbg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjmkm"]
@@ -41,6 +43,54 @@ region = Rect2(448, 128, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_skc68"]
 atlas = ExtResource("3_y2pq0")
 region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kno1"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkixi"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1l54"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0gis"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv3as"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gvo2"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuepj"]
+atlas = ExtResource("3_dn6nw")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyrj5"]
+atlas = ExtResource("4_y2pq0")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8a0n"]
+atlas = ExtResource("4_y2pq0")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js24q"]
+atlas = ExtResource("4_y2pq0")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v4tj"]
+atlas = ExtResource("4_y2pq0")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oepwo"]
+atlas = ExtResource("4_y2pq0")
+region = Rect2(256, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrf5q"]
 atlas = ExtResource("2_dn6nw")
@@ -193,6 +243,52 @@ animations = [{
 "loop": true,
 "name": &"Dash",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kno1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkixi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1l54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0gis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv3as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gvo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuepj")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyrj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8a0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js24q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v4tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oepwo")
+}],
+"loop": false,
+"name": &"Hurt",
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,

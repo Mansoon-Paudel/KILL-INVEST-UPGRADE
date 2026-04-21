@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://tknjeoo6ng5k" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBold.ttf" id="2_8jknd"]
 [ext_resource type="Script" uid="uid://cgvnbh07tqp4f" path="res://SCRIPT/button.gd" id="2_40xib"]
 [ext_resource type="Texture2D" uid="uid://fx2d7d0g1k7g" path="res://ASSETS/UI/Sliced Images/- Resources/swords.png" id="7_8jknd"]
+[ext_resource type="Script" uid="uid://hl2qhwb0mf2o" path="res://SCRIPT/btn.gd" id="8_rd8xb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gs7x4"]
 texture = ExtResource("1_lquar")
@@ -113,5 +114,9 @@ theme_override_font_sizes/font_size = 44
 text = "GO!"
 horizontal_alignment = 1
 
+[node name="BTN" type="Node" parent="CanvasLayer" unique_id=255492607]
+script = ExtResource("8_rd8xb")
+
 [connection signal="button_down" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/Button" to="CanvasLayer/BTN" method="_on_button_button_up"]
