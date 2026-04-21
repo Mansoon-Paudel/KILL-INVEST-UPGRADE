@@ -10,4 +10,4 @@ func _on_button_pressed() -> void:
 
 
 func _on_button_2_button_up() -> void:
-	get_tree().change_scene_to_file("res://SCENE/world.tscn")
+	get_tree().change_scene_to_file("res://SCENE/workd/world.tscn")
