@@ -1,6 +1,24 @@
-# KILL-UPGRDAE-KILL
-An 2D incremental game made with Godot, Yes the project has Huge scope but, I want to explore more so This is a stop for this project
-Will be continuing 3D from now on...
-
-## How does this work
-You go to the world fight enemy earn currencies, Use them and Upgrade your character for better performance
+# ⚔️ KILL-FARM-UPGRADE
+ 
+A dark fantasy 2D pixel action game made in Godot.
+ 
+**How it works:** Kill enemies, earn coins & crystals, upgrade, repeat.
+ 
+---
+ 
+## Controls
+- Move:  A / D <br>
+- Jump:  W <br>
+- Attack:  Left Click <br>
+- Dash:  Shift <br>
+ 
+---
+ 
+## Features
+- Enemy AI with chase, attack and stun
+- Upgrade your stats, skills and character tier
+- Coins, crystals and kills tracked across runs
+---
+ 
+*Built with Godot 4 & GDScript.*
+ 
