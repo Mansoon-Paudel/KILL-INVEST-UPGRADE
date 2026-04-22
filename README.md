@@ -1,6 +1,6 @@
 # ⚔️ KILL-FARM-UPGRADE
  
-A dark fantasy 2D pixel action game made in Godot.
+An 2D pixel action incremental game made in Godot.
  
 **How it works:** Kill enemies, earn coins & crystals, upgrade, repeat.
  
@@ -21,4 +21,7 @@ A dark fantasy 2D pixel action game made in Godot.
 ---
  
 *Built with Godot 4 & GDScript.*
+
+[![Watch Gameplay](https://github.com/user-attachments/assets/3003dbff-4d97-4411-9e01-1ba2f368567b
+)](https://youtu.be/p0BknUG2fCc)
  
