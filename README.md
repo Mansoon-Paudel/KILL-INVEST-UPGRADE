@@ -1,4 +1,4 @@
-# ⚔️ KILL-FARM-UPGRADE
+#  KILL-FARM-UPGRADE
  
 An 2D pixel action incremental game made in Godot.
  
