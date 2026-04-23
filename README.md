@@ -20,8 +20,7 @@ An 2D pixel action incremental game made in Godot.
 - Coins, crystals and kills tracked across runs
 ---
  
-*Built with Godot 4 & GDScript.*
-
+Video
 [![Watch Gameplay](https://github.com/user-attachments/assets/3003dbff-4d97-4411-9e01-1ba2f368567b
 )](https://youtu.be/p0BknUG2fCc)
  
