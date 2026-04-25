@@ -161,6 +161,7 @@ shape = SubResource("CapsuleShape2D_lmpi2")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1578546152]
 
 [node name="Attackzone" type="Area2D" parent="." unique_id=290527920]
+visible = false
 position = Vector2(-431, 106)
 script = ExtResource("22_xddbv")
 
@@ -169,12 +170,23 @@ position = Vector2(431, -106)
 shape = SubResource("CircleShape2D_atvc4")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=526359210]
+visible = false
 position = Vector2(-431, 106)
 script = ExtResource("23_qqjg7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1882440453]
 position = Vector2(431, -106)
 shape = SubResource("CircleShape2D_1trrf")
+
+[node name="FloorCheck" type="RayCast2D" parent="." unique_id=570159760]
+position = Vector2(-20, 14)
+scale = Vector2(0.99999994, 0.9999999)
+target_position = Vector2(0, 20)
+
+[node name="FloorCheck2" type="RayCast2D" parent="." unique_id=227622240]
+position = Vector2(32, 14)
+scale = Vector2(0.99999994, 0.9999999)
+target_position = Vector2(0, 20)
 
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]

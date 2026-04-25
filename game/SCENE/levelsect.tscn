@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://bgk4dc33q8tmx"]
+
+[ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="1_sq8ft"]
+[ext_resource type="Texture2D" uid="uid://b4l2g45pieht0" path="res://ASSETS/UI/Sliced Images/Part_4/Actions Bar/button_orange.png" id="2_en1ss"]
+[ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="2_rd46m"]
+[ext_resource type="Script" uid="uid://leyo2exnchpu" path="res://SCRIPT/button-lv.gd" id="3_0217c"]
+[ext_resource type="FontFile" uid="uid://rxvg4bc12apj" path="res://ASSETS/FONT/Tomorrow/Tomorrow-SemiBoldItalic.ttf" id="4_0217c"]
+[ext_resource type="Script" uid="uid://ksgah88kvdji" path="res://SCRIPT/slctmanager.gd" id="6_0217c"]
+
+[node name="Node" type="Node" unique_id=2105142010]
+
+[node name="BG" type="TextureRect" parent="." unique_id=1337808007]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sq8ft")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="." unique_id=1821047910]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 57.0
+offset_top = -207.0
+offset_right = 265.0
+offset_bottom = -121.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button" unique_id=1694241897]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 1"
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="." unique_id=1169940516]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 328.0
+offset_top = -207.0
+offset_right = 536.0
+offset_bottom = -121.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button2" unique_id=865493527]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 2"
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="." unique_id=1708830897]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 606.0
+offset_top = -207.0
+offset_right = 814.0
+offset_bottom = -121.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button3" unique_id=1194950995]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 3"
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="." unique_id=1197602816]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 872.0
+offset_top = -207.0
+offset_right = 1080.0
+offset_bottom = -121.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button4" unique_id=2044447330]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 4"
+vertical_alignment = 1
+
+[node name="Button5" type="Button" parent="." unique_id=647983670]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 58.0
+offset_top = -109.0
+offset_right = 266.0
+offset_bottom = -23.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button5" unique_id=1313521010]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 5"
+vertical_alignment = 1
+
+[node name="Button6" type="Button" parent="." unique_id=669098893]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 328.0
+offset_top = -109.0
+offset_right = 536.0
+offset_bottom = -23.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button6" unique_id=1070916418]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 6"
+vertical_alignment = 1
+
+[node name="Button7" type="Button" parent="." unique_id=2021217944]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 606.0
+offset_top = -109.0
+offset_right = 814.0
+offset_bottom = -23.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button7" unique_id=537800813]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 7"
+vertical_alignment = 1
+
+[node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("2_rd46m")]
+
+[node name="MANAGER" type="Node" parent="." unique_id=409586217]
+script = ExtResource("6_0217c")
+
+[connection signal="button_up" from="Button" to="MANAGER" method="_on_button_button_up"]
+[connection signal="button_up" from="Button2" to="MANAGER" method="_on_button_2_button_up"]
+[connection signal="button_up" from="Button3" to="MANAGER" method="_on_button_3_button_up"]
+[connection signal="button_up" from="Button4" to="MANAGER" method="_on_button_4_button_up"]
+[connection signal="button_up" from="Button5" to="MANAGER" method="_on_button_5_button_up"]
+[connection signal="button_up" from="Button6" to="MANAGER" method="_on_button_6_button_up"]
+[connection signal="button_up" from="Button7" to="MANAGER" method="_on_button_7_button_up"]

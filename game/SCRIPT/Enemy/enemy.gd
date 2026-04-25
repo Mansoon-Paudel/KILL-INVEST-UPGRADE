@@ -18,11 +18,25 @@ var is_attacking = false
 var is_stunned = false
 var is_dying = false
 var knockback_velocity = Vector2.ZERO
+var damage = 1
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection = $DetectionZone
 @onready var attack_zone = $AttackZone
+
+
+func _ready() -> void:
+	if get_tree().current_scene.scene_file_path=="res://SCENE/workd/world.tscn":
+		health = 3
+		damage = 1
+	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+		health = 5
+		damage = 1.5
+	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+		health = 7
+		damage = 2.5
+	
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -73,7 +87,7 @@ func attack():
 	sprite.play("attack")
 	await sprite.animation_finished
 	if can_attack and player != null:
-		player.take_damage(1)
+		player.take_damage(damage)
 	is_attacking = false
 	if can_attack and player != null:
 		current_state = State.ATTACK
@@ -116,7 +130,16 @@ func die():
 	sprite.play("Die")
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
-	GameState.Kill += 1
-	GameState.Coin += 2
-	GameState.Crystal += 1
+	if get_tree().current_scene.scene_file_path=="res://SCENE/workd/world.tscn":
+		GameState.Kill += 1
+		GameState.Coin += 2
+		GameState.Crystal += 1
+	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+		GameState.Kill += 1
+		GameState.Coin += 3
+		GameState.Crystal += 2
+	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+		GameState.Kill += 2
+		GameState.Coin += 4
+		GameState.Crystal += 2
 	queue_free()

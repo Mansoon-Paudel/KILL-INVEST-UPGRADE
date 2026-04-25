@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c6qcdb56tu6wk" path="res://SCENE/Player.tscn" id="4_65lgn"]
 [ext_resource type="PackedScene" uid="uid://b31engdaeflvk" path="res://SCENE/ENEMY/Yeti.tscn" id="5_w034d"]
 [ext_resource type="PackedScene" uid="uid://bcg6f4gh4qa1s" path="res://SCENE/ENEMY/Bear.tscn" id="6_c6gak"]
-[ext_resource type="PackedScene" uid="uid://eqd2bvpmun83" path="res://SCENE/ENEMY/Snake.tscn" id="7_gmcwg"]
 [ext_resource type="Texture2D" uid="uid://hjh3r55jymh4" path="res://ASSETS/UI/Sliced Images/- Window & Containers/c_full_header.png" id="8_h4b53"]
 [ext_resource type="FontFile" uid="uid://kcd5a3wne5yo" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBoldItalic.ttf" id="9_ws74j"]
 [ext_resource type="Texture2D" uid="uid://cbr2beue13up8" path="res://ASSETS/UI/Sliced Images/- Menu (large buttons)/button-HOVER.png" id="10_ti51w"]
@@ -278,13 +277,10 @@ position = Vector2(558, 501)
 
 [node name="Yeti" parent="." unique_id=885736534 instance=ExtResource("5_w034d")]
 position = Vector2(1787, 499)
-health = 4
+health = 5
 
 [node name="Bear" parent="." unique_id=461732269 instance=ExtResource("6_c6gak")]
 position = Vector2(836, 492)
-
-[node name="Snake" parent="." unique_id=2062653591 instance=ExtResource("7_gmcwg")]
-position = Vector2(2666, 490)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=650827465]
 

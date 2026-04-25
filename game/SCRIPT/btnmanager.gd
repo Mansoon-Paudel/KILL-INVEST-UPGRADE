@@ -10,18 +10,21 @@ func _process(_delta: float) -> void:
 		death_panel.show()
 
 func _on_button_2_button_up() -> void:
-	_reset_and_go("res://SCENE/workd/world.tscn")
+	get_tree().reload_current_scene()
+	GameState.player_dead = false
+	GameState.health = GameState.get_stat("health") 
+	death_panel.hide()
 
 func _on_button_3_button_up() -> void:
-	_reset_and_go("res://SCENE/Shop.tscn")
+	reset_and_go("res://SCENE/Shop.tscn")
 
 func _on_button_4_button_up() -> void:
-	_reset_and_go("res://SCENE/levels.tscn")
+	reset_and_go("res://SCENE/levels.tscn")
 
 func _on_button_pressed() -> void:
-	_reset_and_go("res://SCENE/Skill-tree.tscn")
+	reset_and_go("res://SCENE/Skill-tree.tscn")
 
-func _reset_and_go(scene: String) -> void:
+func reset_and_go(scene: String) -> void:
 	GameState.player_dead = false
 	GameState.health = GameState.get_stat("health") 
 	get_tree().change_scene_to_file(scene)

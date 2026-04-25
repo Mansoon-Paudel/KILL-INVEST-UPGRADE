@@ -17,13 +17,56 @@ var can_attack = false
 var is_attacking = false
 var is_stunned = false
 var is_dying = false
+var damage = 2
 var knockback_velocity = Vector2.ZERO
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var detection = $DetectionZone
-@onready var attack_zone = $AttackZone
+@onready var detection: Area2D = $DetectionZone
+@onready var attack_zone: Area2D = $Attackzone
+@onready var floor_check_rgt: RayCast2D = $FloorCheck2
+@onready var floor_check_lft: RayCast2D = $FloorCheck
 
+
+
+func _ready() -> void:
+	detection.body_entered.connect(_on_detection_entered)
+	detection.body_exited.connect(_on_detection_exited)
+	attack_zone.body_entered.connect(_on_attack_zone_entered)
+	attack_zone.body_exited.connect(_on_attack_zone_exited)
+	var scene = get_tree().current_scene.scene_file_path
+	if scene == "res://SCENE/workd/world.tscn":
+		health = 7
+		damage = 2
+	elif scene == "res://SCENE/workd/world2.tscn":
+		health = 10
+		damage = 3
+	elif scene == "res://SCENE/workd/world3.tscn":  
+		health = 14
+		damage = 4
+	elif scene == "res://SCENE/workd/world4.tscn":  
+		health = 9
+		damage = 3
+	elif scene == "res://SCENE/workd/world5.tscn":  
+		health = 13
+		damage = 4
+func _on_detection_entered(body):
+	if body is Player:
+		player = body
+		current_state = State.CHASE
+func _on_detection_exited(body):
+	if body is Player:
+		player = null
+		current_state = State.IDLE
+func _on_attack_zone_entered(body):
+	if body is Player:
+		can_attack = true
+		current_state = State.ATTACK
+func _on_attack_zone_exited(body):
+	if body is Player:
+		can_attack = false
+		if not is_stunned:
+			current_state = State.CHASE
 func _physics_process(delta):
 	apply_gravity(delta)
 	state_machine(delta)
@@ -32,29 +75,23 @@ func _physics_process(delta):
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-func state_machine(delta):
-	match current_state:
-		State.IDLE:
-			velocity.x = 0
-			sprite.play("idle")
-		State.CHASE:
-			chase_player()
-			sprite.play("walk")
-			if can_attack:
-				current_state = State.ATTACK
-		State.ATTACK:
-			attack()
-		State.STUN:
-			velocity.x = move_toward(velocity.x, 0, knockback_force * delta)
-		State.DEAD:
-			die()
-
 func chase_player():
 	if player == null:
 		current_state = State.IDLE
 		return
+	
 	var direction = sign(player.global_position.x - global_position.x)
+	
+	var can_move = false
+	if direction < 0:
+		can_move = floor_check_lft.is_colliding()
+	else:
+		can_move = floor_check_rgt.is_colliding()
+	
+	if not can_move:
+		velocity.x = 0
+		return  
+	
 	velocity.x = direction * speed
 	if direction < 0:
 		sprite.flip_h = true
@@ -64,7 +101,6 @@ func chase_player():
 		sprite.flip_h = false
 		lft.disabled = true
 		rgt.disabled = false
-
 func attack():
 	if is_attacking:
 		return
@@ -73,7 +109,7 @@ func attack():
 	sprite.play("attack")
 	await sprite.animation_finished
 	if can_attack and player != null:
-		player.take_damage(2)
+		player.take_damage(damage)
 	is_attacking = false
 	if can_attack and player != null:
 		current_state = State.ATTACK
@@ -92,7 +128,25 @@ func take_damage(amount):
 	else:
 		if player != null:
 			stun(player.global_position)
-
+func state_machine(delta):
+	match current_state:
+		State.IDLE:
+			velocity.x = 0
+			sprite.play("idle")
+		State.CHASE:
+			chase_player()
+			if velocity.x == 0:        #
+				sprite.play("idle")    
+			else:
+				sprite.play("walk")    
+			if can_attack:
+				current_state = State.ATTACK
+		State.ATTACK:
+			attack()
+		State.STUN:
+			velocity.x = move_toward(velocity.x, 0, knockback_force * delta)
+		State.DEAD:
+			die()
 func stun(from_position: Vector2):
 	if is_stunned:
 		return
@@ -116,7 +170,33 @@ func die():
 	sprite.play("Die")
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
-	GameState.Kill += 1
-	GameState.Coin += 2
-	GameState.Crystal += 1
-	queue_free()
+	var scene = get_tree().current_scene.scene_file_path
+	if scene == "res://SCENE/workd/world.tscn":
+		GameState.Kill += 2
+		GameState.Coin += 4
+		GameState.Crystal += 2
+	elif scene == "res://SCENE/workd/world2.tscn":
+		GameState.Kill += 3
+		GameState.Coin += 6
+		GameState.Crystal += 3
+	elif scene == "res://SCENE/workd/world3.tscn": 
+		GameState.Kill += 4
+		GameState.Coin += 8
+		GameState.Crystal += 4
+	elif scene == "res://SCENE/workd/world4.tscn" or scene == "res://SCENE/workd/world5.tscn": 
+		GameState.Kill += 3
+		GameState.Coin += 6
+		GameState.Crystal += 3
+	if scene == "res://SCENE/workd/world2.tscn":
+		await get_tree().create_timer(1.5).timeout
+		GameState.Snake_killed = true
+		print(GameState.Snake_killed)
+		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
+		
+	elif scene == "res://SCENE/workd/world3.tscn":
+		await get_tree().create_timer(1.5).timeout
+		GameState.Snake_killed2 = true
+		print(GameState.Snake_killed)
+		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
+	else:
+		queue_free()

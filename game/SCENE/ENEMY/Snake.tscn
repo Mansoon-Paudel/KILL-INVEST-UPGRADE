@@ -169,6 +169,14 @@ script = ExtResource("23_apbij")
 position = Vector2(431, -106)
 shape = SubResource("CircleShape2D_hqkdf")
 
+[node name="FloorCheck" type="RayCast2D" parent="." unique_id=1643236375]
+position = Vector2(-13, 2)
+target_position = Vector2(0, 20)
+
+[node name="FloorCheck2" type="RayCast2D" parent="." unique_id=611677476]
+position = Vector2(71, 2)
+target_position = Vector2(0, 20)
+
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]
 [connection signal="body_exited" from="Attackzone" to="Attackzone" method="_on_body_exited"]

@@ -18,6 +18,12 @@ var tier: int = 1
 var Dash_Speed = speed+300
 signal TileMapBoundsChanged(bounds: Array[Vector2])
 var player_dead: bool = false
+var yeti_killed: bool = false
+var Snake_killed: bool = false
+var Snake_killed2: bool = false
+var ORC_killed: bool = false
+var ORC_killed2: bool = false
+var ORC_killed3: bool = false
 const TIER_SPRITES = [
 	preload("res://SCENE/Player/Tier_1.tres"),
 	preload("res://SCENE/Player/Tier_2.tres"),
