@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 enum State {
 	IDLE,
 	CHASE,
@@ -6,11 +7,13 @@ enum State {
 	STUN,
 	DEAD
 }
+
 @export var speed: float = 100
 @export var gravity: float = 900
 @export var health = 3
 @export var knockback_force = 100
 @export var stun_duration = 0.5
+
 var current_state = State.IDLE
 var player = null
 var can_attack = false
@@ -19,26 +22,60 @@ var is_stunned = false
 var is_dying = false
 var knockback_velocity = Vector2.ZERO
 var damage = 1
+var attack_cooldown: float = 0.0
+const ATTACK_DELAY: float = 0.5
+
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection = $DetectionZone
-@onready var attack_zone = $AttackZone
+@onready var attack_zone = $Attackzone
 
 
 func _ready() -> void:
-	if get_tree().current_scene.scene_file_path=="res://SCENE/workd/world.tscn":
+	detection.body_entered.connect(_on_detection_entered)
+	detection.body_exited.connect(_on_detection_exited)
+	attack_zone.body_entered.connect(_on_attack_zone_entered)
+	attack_zone.body_exited.connect(_on_attack_zone_exited)
+
+	var scene = get_tree().current_scene.scene_file_path
+	if scene == "res://SCENE/workd/world.tscn":
 		health = 3
 		damage = 1
-	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+	elif scene == "res://SCENE/workd/world2.tscn":
 		health = 5
 		damage = 1.5
-	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+	elif scene == "res://SCENE/workd/world3.tscn":  
 		health = 7
 		damage = 2.5
-	
+
+func _on_detection_entered(body):
+	if body is Player:
+		player = body
+		if current_state == State.IDLE:
+			current_state = State.CHASE
+
+func _on_detection_exited(body):
+	if body is Player:
+		player = null
+		current_state = State.IDLE
+
+func _on_attack_zone_entered(body):
+	if body is Player:
+		can_attack = true
+		if not is_stunned and not is_attacking:
+			current_state = State.ATTACK
+
+func _on_attack_zone_exited(body):
+	if body is Player:
+		if not is_stunned:
+			can_attack = false
+			if not is_attacking:
+				current_state = State.CHASE
 
 func _physics_process(delta):
+	if attack_cooldown > 0:
+		attack_cooldown -= delta
 	apply_gravity(delta)
 	state_machine(delta)
 	move_and_slide()
@@ -54,13 +91,18 @@ func state_machine(delta):
 			sprite.play("idle")
 		State.CHASE:
 			chase_player()
-			sprite.play("walk")
-			if can_attack:
+			if velocity.x == 0:
+				sprite.play("idle")
+			else:
+				sprite.play("walk")
+			if attack_zone.overlaps_body(player) and player != null:
+				can_attack = true
 				current_state = State.ATTACK
 		State.ATTACK:
 			attack()
 		State.STUN:
 			velocity.x = move_toward(velocity.x, 0, knockback_force * delta)
+			sprite.play("hurt")
 		State.DEAD:
 			die()
 
@@ -80,26 +122,28 @@ func chase_player():
 		rgt.disabled = false
 
 func attack():
-	if is_attacking:
+	if is_attacking or attack_cooldown > 0:
 		return
 	is_attacking = true
 	velocity.x = 0
 	sprite.play("attack")
 	await sprite.animation_finished
-	if can_attack and player != null:
+	if attack_zone.overlaps_body(player) and player != null:
 		player.take_damage(damage)
+		can_attack = true
 	is_attacking = false
-	if can_attack and player != null:
-		current_state = State.ATTACK
-	elif player != null:
-		current_state = State.CHASE
-	else:
+	attack_cooldown = ATTACK_DELAY
+	if player == null:
 		current_state = State.IDLE
+	elif attack_zone.overlaps_body(player):
+		current_state = State.ATTACK
+	else:
+		can_attack = false
+		current_state = State.CHASE
 
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
-
 	health -= amount
 	if health <= 0:
 		current_state = State.DEAD
@@ -111,17 +155,24 @@ func stun(from_position: Vector2):
 	if is_stunned:
 		return
 	is_stunned = true
+	is_attacking = false
 	current_state = State.STUN
 	var direction = (global_position - from_position).normalized()
 	velocity = direction * knockback_force
 	sprite.play("hurt")
 	await get_tree().create_timer(0.35).timeout
-	get_tree().paused=true
+	get_tree().paused = true
 	await get_tree().create_timer(0.12).timeout
-	get_tree().paused=false
-	await sprite.animation_finished
+	get_tree().paused = false
+	await get_tree().create_timer(stun_duration).timeout
 	is_stunned = false
-	current_state = State.CHASE
+	if player == null:
+		current_state = State.IDLE
+	elif attack_zone.overlaps_body(player):
+		can_attack = true
+		current_state = State.ATTACK
+	else:
+		current_state = State.CHASE
 
 func die():
 	if is_dying:
@@ -130,15 +181,16 @@ func die():
 	sprite.play("Die")
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
-	if get_tree().current_scene.scene_file_path=="res://SCENE/workd/world.tscn":
+	var scene = get_tree().current_scene.scene_file_path
+	if scene == "res://SCENE/workd/world.tscn":
 		GameState.Kill += 1
 		GameState.Coin += 2
 		GameState.Crystal += 1
-	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+	elif scene == "res://SCENE/workd/world2.tscn":
 		GameState.Kill += 1
 		GameState.Coin += 3
 		GameState.Crystal += 2
-	elif get_tree().current_scene.scene_file_path=="res://SCENE/workd/world2.tscn":
+	elif scene == "res://SCENE/workd/world3.tscn": 
 		GameState.Kill += 2
 		GameState.Coin += 4
 		GameState.Crystal += 2

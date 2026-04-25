@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cmvxfylexwtj0"]
+[gd_scene format=3 uid="uid://dplqqo7svo3n1"]
 
 [ext_resource type="Script" uid="uid://dloca2qnnldhm" path="res://SCRIPT/btnmanager.gd" id="1_iea4r"]
 [ext_resource type="Texture2D" uid="uid://b5rd4dk71jgk3" path="res://ASSETS/Map/map.png" id="2_dlj01"]
@@ -284,7 +284,7 @@ health = 4
 position = Vector2(836, 492)
 
 [node name="Snake" parent="." unique_id=2062653591 instance=ExtResource("8_ssx7d")]
-position = Vector2(2666, 490)
+position = Vector2(2725, 484)
 scale = Vector2(0.89775753, 0.89775753)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=650827465]

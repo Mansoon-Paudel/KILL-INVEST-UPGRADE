@@ -19,32 +19,53 @@ var is_stunned = false
 var is_dying = false
 var damage = 2
 var knockback_velocity = Vector2.ZERO
+const ATTACK_DELAY: float = 0.5
+var attack_cooldown: float = 0.0
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var detection = $DetectionZone
-@onready var attack_zone = $AttackZone
-
-@onready var floor_check: RayCast2D = $FloorCheck
-
-
-
+@onready var attack_zone: Area2D = $Attackzone
+@onready var detection: Area2D = $DetectionZone
+@onready var floor_check_lft: RayCast2D = $FloorCheck
+@onready var floor_check_rgt: RayCast2D = $FloorCheck2
 func _ready() -> void:
+	detection.body_entered.connect(_on_detection_entered)
+	detection.body_exited.connect(_on_detection_exited)
+	attack_zone.body_entered.connect(_on_attack_zone_entered)
+	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world4.tscn":  
-		health = 20
-		damage = 4.5
-	elif scene == "res://SCENE/workd/world5.tscn":  
 		health = 25
 		damage = 5.5
-	elif scene == "res://SCENE/workd/world6.tscn":  
+	elif scene == "res://SCENE/workd/world5.tscn":  
 		health = 35
-		damage = 7
+		damage = 6.5
+	elif scene == "res://SCENE/workd/world6.tscn":  
+		health = 50
+		damage = 8.5
+func _on_detection_entered(body):
+	if body is Player:
+		player = body
+		current_state = State.CHASE
+func _on_detection_exited(body):
+	if body is Player:
+		player = null
+		current_state = State.IDLE
+
+func _on_attack_zone_entered(body):
+	if body is Player:
+		can_attack = true
+		current_state = State.ATTACK
+func _on_attack_zone_exited(body):
+	if body is Player:
+		if not is_stunned:
+			can_attack = false
+			if not is_attacking:
+				current_state = State.CHASE
 func _physics_process(delta):
 	apply_gravity(delta)
 	state_machine(delta)
 	move_and_slide()
-
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -52,12 +73,19 @@ func chase_player():
 	if player == null:
 		current_state = State.IDLE
 		return
+	
 	var direction = sign(player.global_position.x - global_position.x)
-	floor_check.target_position = Vector2(direction * 20, 20)
-	floor_check.force_raycast_update()
-	if not floor_check.is_colliding():
+	
+	var can_move = false
+	if direction < 0:
+		can_move = floor_check_lft.is_colliding()
+	else:
+		can_move = floor_check_rgt.is_colliding()
+	
+	if not can_move:
 		velocity.x = 0
-		return
+		return  
+	
 	velocity.x = direction * speed
 	if direction < 0:
 		sprite.flip_h = true
@@ -74,8 +102,12 @@ func state_machine(delta):
 			sprite.play("idle")
 		State.CHASE:
 			chase_player()
-			sprite.play("walk")
-			if can_attack:
+			if velocity.x == 0:
+				sprite.play("idle")
+			else:
+				sprite.play("walk")
+			if attack_zone.overlaps_body(player) and player != null:
+				can_attack = true
 				current_state = State.ATTACK
 		State.ATTACK:
 			attack()
@@ -90,16 +122,18 @@ func attack():
 	velocity.x = 0
 	sprite.play("attack")
 	await sprite.animation_finished
-	if can_attack and player != null:
+	if attack_zone.overlaps_body(player) and player != null:
 		player.take_damage(damage)
+		can_attack = true
 	is_attacking = false
-	if can_attack and player != null:
-		current_state = State.ATTACK
-	elif player != null:
-		current_state = State.CHASE
-	else:
+	attack_cooldown = ATTACK_DELAY
+	if player == null:
 		current_state = State.IDLE
-
+	elif attack_zone.overlaps_body(player):
+		current_state = State.ATTACK
+	else:
+		can_attack = false
+		current_state = State.CHASE
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
@@ -125,7 +159,16 @@ func stun(from_position: Vector2):
 	get_tree().paused=false
 	await sprite.animation_finished
 	is_stunned = false
-	current_state = State.CHASE
+	is_stunned = true
+	is_attacking = false  
+	if player == null:
+		current_state = State.IDLE
+	elif attack_zone.overlaps_body(player):
+		can_attack = true
+		current_state = State.ATTACK
+	else:
+		current_state = State.CHASE
+	
 
 func die():
 	if is_dying:
