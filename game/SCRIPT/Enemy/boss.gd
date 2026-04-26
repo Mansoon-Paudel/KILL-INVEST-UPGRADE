@@ -13,6 +13,8 @@ enum State {
 @export var health = 10
 @export var knockback_force = 100
 @export var stun_duration = 0.5
+@export var arena_left: float = 2550
+@export var arena_right: float = 3050
 
 var current_state = State.IDLE
 var player = null
@@ -22,16 +24,15 @@ var is_stunned = false
 var is_dying = false
 var damage = 2
 var knockback_velocity = Vector2.ZERO
-var attack_cooldown: float = 0.0
 const ATTACK_DELAY: float = 0.5
+var attack_cooldown: float = 0.0
+var anger_played: bool = false
 
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_zone: Area2D = $Attackzone
 @onready var detection: Area2D = $DetectionZone
-@onready var floor_check_lft: RayCast2D = $FloorCheck
-@onready var floor_check_rgt: RayCast2D = $FloorCheck2
 
 func _ready() -> void:
 	detection.body_entered.connect(_on_detection_entered)
@@ -39,20 +40,25 @@ func _ready() -> void:
 	attack_zone.body_entered.connect(_on_attack_zone_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world7.tscn":
-		health = 70
-		damage = 12
-	elif scene == "res://SCENE/workd/world8.tscn":
-		health = 90
-		damage = 15
-	elif scene == "res://SCENE/workd/world9.tscn":
-		health = 110
-		damage = 18
+	if scene == "res://SCENE/workd/world4.tscn":
+		health = 25
+		damage = 5.5
+	elif scene == "res://SCENE/workd/world5.tscn":
+		health = 35
+		damage = 6.5
+	elif scene == "res://SCENE/workd/world6.tscn":
+		health = 50
+		damage = 8.5
+
 func _on_detection_entered(body):
-	if body is Player:
+	if body is Player and not anger_played:
 		player = body
-		if current_state == State.IDLE:
-			current_state = State.CHASE
+		anger_played = true
+		set_physics_process(false)
+		sprite.play("Anger")
+		await sprite.animation_finished
+		set_physics_process(true)
+		current_state = State.CHASE
 
 func _on_detection_exited(body):
 	if body is Player:
@@ -62,7 +68,7 @@ func _on_detection_exited(body):
 func _on_attack_zone_entered(body):
 	if body is Player:
 		can_attack = true
-		if not is_stunned and not is_attacking:
+		if not is_stunned and not is_attacking and current_state == State.CHASE:
 			current_state = State.ATTACK
 
 func _on_attack_zone_exited(body):
@@ -110,12 +116,8 @@ func chase_player():
 		current_state = State.IDLE
 		return
 	var direction = sign(player.global_position.x - global_position.x)
-	var can_move = false
-	if direction < 0:
-		can_move = floor_check_lft.is_colliding()
-	else:
-		can_move = floor_check_rgt.is_colliding()
-	if not can_move:
+	if (global_position.x <= arena_left and direction < 0) or \
+	   (global_position.x >= arena_right and direction > 0):
 		velocity.x = 0
 		return
 	velocity.x = direction * speed
@@ -189,30 +191,33 @@ func die():
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world7.tscn":
-		GameState.Coin += 25
-		GameState.Kill += 10
-		GameState.Crystal+=10
-	elif scene == "res://SCENE/workd/world8.tscn":
-		GameState.Coin += 35
-		GameState.Kill += 13
-		GameState.Crystal+=15
-	elif scene == "res://SCENE/workd/world8.tscn":
-		GameState.Coin += 45
-		GameState.Kill += 15
-		GameState.Crystal+=22
-	if scene == "res://SCENE/workd/world7.tscn":
-		await get_tree().create_timer(0.5).timeout
-		GameState.dwarf_killed = true
+	if scene == "res://SCENE/workd/world.tscn":
+		GameState.Kill += 2
+		GameState.Coin += 4
+		GameState.Crystal += 2
+	elif scene == "res://SCENE/workd/world2.tscn":
+		GameState.Kill += 3
+		GameState.Coin += 6
+		GameState.Crystal += 3
+	elif scene == "res://SCENE/workd/world3.tscn":
+		GameState.Kill += 4
+		GameState.Coin += 8
+		GameState.Crystal += 4
+	elif scene == "res://SCENE/workd/world4.tscn":
+		GameState.Kill += 5
+		GameState.Coin += 10
+		GameState.Crystal += 5
+	if scene == "res://SCENE/workd/world4.tscn":
+		await get_tree().create_timer(1.5).timeout
+		GameState.ORC_killed = true
 		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	if scene == "res://SCENE/workd/world8.tscn":
-		await get_tree().create_timer(0.5).timeout
-		GameState.dwarf_killed2 = true
+	elif scene == "res://SCENE/workd/world5.tscn":
+		await get_tree().create_timer(1.5).timeout
+		GameState.ORC_killed2 = true
 		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	if scene == "res://SCENE/workd/world9.tscn":
-		await get_tree().create_timer(0.5).timeout
-		GameState.dwarf_killed3 = true
+	elif scene == "res://SCENE/workd/world6.tscn":
+		await get_tree().create_timer(1.5).timeout
+		GameState.ORC_killed3 = true
 		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
 	else:
 		queue_free()
-		

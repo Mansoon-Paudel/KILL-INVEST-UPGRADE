@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://tknjeoo6ng5k" path="res://ASSETS/FONT/Tomorrow/Tomorrow-ExtraBold.ttf" id="16_2fiy4"]
 [ext_resource type="PackedScene" uid="uid://d1whagn2htoux" path="res://SCENE/ENEMY/ORC.tscn" id="17_0rpyi"]
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="17_ynb28"]
+[ext_resource type="PackedScene" uid="uid://d1ar2x7m10p3u" path="res://SCENE/blocker.tscn" id="18_cs3l8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scw50"]
 load_path = "res://.godot/imported/Background.png-2c8ab71dcd069279fafc29e848b45877.ctex"
@@ -2181,6 +2182,9 @@ texture = ExtResource("13_x1i45")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xh2d1"]
 texture = ExtResource("13_x1i45")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5sli2"]
+size = Vector2(5, 65)
+
 [node name="World" type="Node2D" unique_id=1246807474]
 
 [node name="BTNMANAGER" type="Node" parent="." unique_id=1417062040]
@@ -2484,6 +2488,24 @@ vertical_alignment = 1
 [node name="ORC" parent="." unique_id=885736534 instance=ExtResource("17_0rpyi")]
 position = Vector2(1396, 560)
 scale = Vector2(0.644929, 0.644929)
+
+[node name="BLOCKER" parent="." unique_id=570155415 instance=ExtResource("18_cs3l8")]
+position = Vector2(1292, 548)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER" unique_id=824064787]
+position = Vector2(-104, -8)
+shape = SubResource("RectangleShape2D_5sli2")
+
+[node name="BLOCKER2" parent="." unique_id=429314837 instance=ExtResource("18_cs3l8")]
+position = Vector2(1817, 547)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER2" unique_id=309285494]
+position = Vector2(-4, -6)
+shape = SubResource("RectangleShape2D_5sli2")
 
 [connection signal="button_down" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_up"]

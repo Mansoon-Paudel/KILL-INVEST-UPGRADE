@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="16_cfj7c"]
 [ext_resource type="PackedScene" uid="uid://b31engdaeflvk" path="res://SCENE/ENEMY/Yeti.tscn" id="17_3lrqv"]
 [ext_resource type="PackedScene" uid="uid://d1whagn2htoux" path="res://SCENE/ENEMY/ORC.tscn" id="17_mphob"]
+[ext_resource type="PackedScene" uid="uid://d1ar2x7m10p3u" path="res://SCENE/blocker.tscn" id="18_ifb6w"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scw50"]
 load_path = "res://.godot/imported/Background.png-2c8ab71dcd069279fafc29e848b45877.ctex"
@@ -2212,6 +2213,9 @@ texture = ExtResource("12_4tsgs")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xh2d1"]
 texture = ExtResource("12_4tsgs")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poaub"]
+size = Vector2(6, 65)
+
 [node name="World" type="Node2D" unique_id=1246807474]
 
 [node name="BTNMANAGER" type="Node" parent="." unique_id=1417062040]
@@ -2527,6 +2531,20 @@ scale = Vector2(0.53424525, 0.53424525)
 [node name="Yeti3" parent="." unique_id=690902529 instance=ExtResource("17_3lrqv")]
 position = Vector2(1868, 480)
 scale = Vector2(0.53424525, 0.53424525)
+
+[node name="BLOCKER" parent="." unique_id=570155415 instance=ExtResource("18_ifb6w")]
+position = Vector2(2589, 533)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER" unique_id=83131725]
+position = Vector2(-150, 3.5)
+shape = SubResource("RectangleShape2D_poaub")
+
+[node name="BLOCKER2" parent="." unique_id=2128186664 instance=ExtResource("18_ifb6w")]
+position = Vector2(3114, 532)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER2" unique_id=1442084543]
+position = Vector2(-4, -6)
+shape = SubResource("RectangleShape2D_poaub")
 
 [connection signal="button_down" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_up"]

@@ -55,7 +55,6 @@ text = "LEVEL 1"
 vertical_alignment = 1
 
 [node name="Button2" type="Button" parent="." unique_id=1169940516]
-visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -152,7 +151,6 @@ text = "LEVEL 4"
 vertical_alignment = 1
 
 [node name="Button5" type="Button" parent="." unique_id=647983670]
-visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -185,7 +183,6 @@ text = "LEVEL 5"
 vertical_alignment = 1
 
 [node name="Button6" type="Button" parent="." unique_id=669098893]
-visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -271,6 +268,39 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -47.0
+offset_top = -14.0
+offset_right = 52.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 8
+"
+vertical_alignment = 1
+
+[node name="Button9" type="Button" parent="." unique_id=500034557]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 58.0
+offset_top = -11.0
+offset_right = 266.0
+offset_bottom = 75.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button9" unique_id=520411560]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
 offset_top = -16.0
 offset_right = 47.0
 offset_bottom = 13.0
@@ -278,8 +308,39 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_0217c")
 theme_override_font_sizes/font_size = 24
-text = "LEVEL 8
-"
+text = "LEVEL 9"
+vertical_alignment = 1
+
+[node name="Button10" type="Button" parent="." unique_id=1254562132]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 328.0
+offset_top = -11.0
+offset_right = 536.0
+offset_bottom = 75.0
+grow_vertical = 2
+icon = ExtResource("2_en1ss")
+flat = true
+expand_icon = true
+script = ExtResource("3_0217c")
+
+[node name="Label" type="Label" parent="Button10" unique_id=2061630055]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_0217c")
+theme_override_font_sizes/font_size = 24
+text = "LEVEL 10"
 vertical_alignment = 1
 
 [node name="GAME" parent="." unique_id=1584043507 instance=ExtResource("2_rd46m")]
@@ -295,3 +356,5 @@ script = ExtResource("6_0217c")
 [connection signal="button_up" from="Button6" to="MANAGER" method="_on_button_6_button_up"]
 [connection signal="button_up" from="Button7" to="MANAGER" method="_on_button_7_button_up"]
 [connection signal="button_up" from="Button8" to="MANAGER" method="_on_button_8_button_up"]
+[connection signal="button_up" from="Button9" to="MANAGER" method="_on_button_9_button_up"]
+[connection signal="button_up" from="Button10" to="MANAGER" method="_on_button_10_button_up"]

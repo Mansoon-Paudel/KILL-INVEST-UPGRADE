@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="15_dywqy"]
 [ext_resource type="PackedScene" uid="uid://b31engdaeflvk" path="res://SCENE/ENEMY/Yeti.tscn" id="17_t1pci"]
 [ext_resource type="PackedScene" uid="uid://d1tpap81kbt8v" path="res://SCENE/ENEMY/dwarf.tscn" id="18_lw78n"]
+[ext_resource type="PackedScene" uid="uid://d1ar2x7m10p3u" path="res://SCENE/blocker.tscn" id="18_uqddp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scw50"]
 load_path = "res://.godot/imported/Background.png-2c8ab71dcd069279fafc29e848b45877.ctex"
@@ -2212,6 +2213,9 @@ texture = ExtResource("11_qsmga")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xh2d1"]
 texture = ExtResource("11_qsmga")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrq7h"]
+size = Vector2(6, 65)
+
 [node name="World" type="Node2D" unique_id=1246807474]
 
 [node name="BTNMANAGER" type="Node" parent="." unique_id=1417062040]
@@ -2230,6 +2234,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_lw78n")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1874719852]
 anchors_preset = 15
@@ -2244,6 +2249,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_lw78n")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=1558085748]
 anchors_preset = 15
@@ -2258,6 +2264,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_lw78n")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=1818499729]
 anchors_preset = 15
@@ -2271,6 +2278,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 texture = SubResource("CompressedTexture2D_scw50")
+metadata/_edit_use_anchors_ = true
 
 [node name="TileMap" type="TileMap" parent="." unique_id=776965072]
 tile_set = SubResource("TileSet_2doxn")
@@ -2526,6 +2534,24 @@ scale = Vector2(0.53424525, 0.53424525)
 
 [node name="Dwarf" parent="." unique_id=1789171744 instance=ExtResource("18_lw78n")]
 position = Vector2(2692, 558)
+
+[node name="BLOCKER" parent="." unique_id=570155415 instance=ExtResource("18_uqddp")]
+position = Vector2(2589, 533)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER" unique_id=783734830]
+position = Vector2(-136, 2)
+shape = SubResource("RectangleShape2D_jrq7h")
+
+[node name="BLOCKER2" parent="." unique_id=412267170 instance=ExtResource("18_uqddp")]
+position = Vector2(3114, 532)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER2" unique_id=1361113438]
+position = Vector2(-4, -6)
+shape = SubResource("RectangleShape2D_jrq7h")
 
 [connection signal="button_down" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_up"]

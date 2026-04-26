@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bcg3178b16kco" path="res://SCENE/game.tscn" id="15_g0dda"]
 [ext_resource type="PackedScene" uid="uid://b31engdaeflvk" path="res://SCENE/ENEMY/Yeti.tscn" id="16_3d1gf"]
 [ext_resource type="PackedScene" uid="uid://d1tpap81kbt8v" path="res://SCENE/ENEMY/dwarf.tscn" id="17_bjox8"]
+[ext_resource type="PackedScene" uid="uid://d1ar2x7m10p3u" path="res://SCENE/blocker.tscn" id="18_d13h1"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scw50"]
 load_path = "res://.godot/imported/Background.png-2c8ab71dcd069279fafc29e848b45877.ctex"
@@ -2212,6 +2213,9 @@ texture = ExtResource("11_m7a7f")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xh2d1"]
 texture = ExtResource("11_m7a7f")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5782w"]
+size = Vector2(6, 65)
+
 [node name="World" type="Node2D" unique_id=1246807474]
 
 [node name="BTNMANAGER" type="Node" parent="." unique_id=1417062040]
@@ -2527,6 +2531,24 @@ scale = Vector2(0.53424525, 0.53424525)
 [node name="Dwarf" parent="." unique_id=1789171744 instance=ExtResource("17_bjox8")]
 position = Vector2(2692, 558)
 scale = Vector2(1.4288536, 1.4288536)
+
+[node name="BLOCKER" parent="." unique_id=570155415 instance=ExtResource("18_d13h1")]
+position = Vector2(2589, 533)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER" unique_id=1961929261]
+position = Vector2(-140, 3)
+shape = SubResource("RectangleShape2D_5782w")
+
+[node name="BLOCKER2" parent="." unique_id=434850089 instance=ExtResource("18_d13h1")]
+position = Vector2(3114, 532)
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCKER2" unique_id=592342410]
+position = Vector2(-4, -6)
+shape = SubResource("RectangleShape2D_5782w")
 
 [connection signal="button_down" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/DEATH/Button" to="CanvasLayer/DEATH/Button" method="_on_button_up"]
