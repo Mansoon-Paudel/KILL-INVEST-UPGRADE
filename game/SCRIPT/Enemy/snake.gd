@@ -60,7 +60,6 @@ func _on_detection_entered(body):
 		player = body
 		if current_state == State.IDLE:
 			current_state = State.CHASE
-
 func _on_detection_exited(body):
 	if body is Player:
 		player = null

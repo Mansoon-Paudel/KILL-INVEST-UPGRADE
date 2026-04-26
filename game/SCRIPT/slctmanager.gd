@@ -5,6 +5,7 @@ extends Node
 @onready var button_5: Button = $"../Button5"
 @onready var button_6: Button = $"../Button6"
 @onready var button_7: Button = $"../Button7"
+@onready var button_8: Button = $"../Button8"
 
 func _process(delta: float) -> void:
 	if  GameState.yeti_killed == true:
@@ -19,6 +20,8 @@ func _process(delta: float) -> void:
 		button_6.show()
 	if GameState.ORC_killed3 == true:
 		button_7.show()
+	if GameState.dwarf_killed == true:
+		button_8.show()
 func _on_button_button_up() -> void:
 	get_tree().change_scene_to_file("res://SCENE/workd/world.tscn")
 
@@ -45,4 +48,8 @@ func _on_button_6_button_up() -> void:
 
 
 func _on_button_7_button_up() -> void:
-	pass
+	get_tree().change_scene_to_file("res://SCENE/workd/world7.tscn")
+
+
+func _on_button_8_button_up() -> void:
+	get_tree().change_scene_to_file("res://SCENE/workd/world8.tscn")

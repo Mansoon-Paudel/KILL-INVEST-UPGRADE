@@ -46,7 +46,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Die",
-"speed": 6.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -128,7 +128,7 @@ height = 166.10953
 radius = 59.211487
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqkdf"]
-radius = 514.28107
+radius = 398.7794
 
 [node name="ORC" type="CharacterBody2D" unique_id=885736534]
 script = ExtResource("1_bv0qm")
@@ -136,7 +136,7 @@ health = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=751838751]
 texture_filter = 1
-position = Vector2(-19.499996, -26.484852)
+position = Vector2(-11.499997, -26.484852)
 scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_kobn3")
 animation = &"Die"
@@ -144,12 +144,12 @@ autoplay = "idle"
 flip_h = true
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
-position = Vector2(-34.5, -19.515152)
+position = Vector2(-26.5, -19.515152)
 shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
-position = Vector2(-2.5, -19.515152)
+position = Vector2(5.5, -19.515152)
 shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("23_8evdx")]
@@ -159,7 +159,7 @@ collision_layer = 1
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
-position = Vector2(19.999998, -47)
+position = Vector2(13, -21)
 rotation = 1.5610062
 shape = SubResource("CapsuleShape2D_lmpi2")
 
@@ -171,11 +171,10 @@ position = Vector2(-431, 106)
 script = ExtResource("24_erf25")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
-position = Vector2(440, -151)
+position = Vector2(432, -129)
 shape = SubResource("CircleShape2D_atvc4")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=526359210]
-visible = false
 position = Vector2(-431, 106)
 script = ExtResource("25_mdifa")
 
@@ -184,11 +183,11 @@ position = Vector2(422, -109)
 shape = SubResource("CircleShape2D_hqkdf")
 
 [node name="FloorCheck" type="RayCast2D" parent="." unique_id=1643236375]
-position = Vector2(-27, -1)
+position = Vector2(-21, 0)
 target_position = Vector2(0, 20)
 
 [node name="FloorCheck2" type="RayCast2D" parent="." unique_id=348069834]
-position = Vector2(50, -1)
+position = Vector2(1, 1)
 target_position = Vector2(0, 20)
 
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]

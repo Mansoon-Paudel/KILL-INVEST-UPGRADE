@@ -42,7 +42,12 @@ func _ready() -> void:
 	if scene == "res://SCENE/workd/world6.tscn":
 		health = 15
 		damage = 4
-
+	if scene == "res://SCENE/workd/world7.tscn":
+		health = 20
+		damage = 5
+	if scene == "res://SCENE/workd/world8.tscn":
+		health = 25
+		damage = 7
 func _on_detection_entered(body):
 	if body is Player:
 		player = body
@@ -205,6 +210,14 @@ func die():
 		GameState.Kill += 5
 		GameState.Coin += 10
 		GameState.Crystal += 5
+	elif scene == "res://SCENE/workd/world7.tscn":
+		GameState.Kill += 7
+		GameState.Coin += 15
+		GameState.Crystal += 7
+	elif scene == "res://SCENE/workd/world8.tscn":
+		GameState.Kill += 9
+		GameState.Coin += 18
+		GameState.Crystal += 8
 	if scene == "res://SCENE/workd/world.tscn":
 		await get_tree().create_timer(0.5).timeout
 		GameState.yeti_killed = true

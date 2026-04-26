@@ -39,16 +39,12 @@ func _ready() -> void:
 	attack_zone.body_entered.connect(_on_attack_zone_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world4.tscn":
-		health = 25
-		damage = 5.5
-	elif scene == "res://SCENE/workd/world5.tscn":
-		health = 35
-		damage = 6.5
-	elif scene == "res://SCENE/workd/world6.tscn":
-		health = 50
-		damage = 8.5
-
+	if scene == "res://SCENE/workd/world7.tscn":
+		health = 70
+		damage = 12
+	elif scene == "res://SCENE/workd/world7.tscn":
+		health = 90
+		damage = 15
 func _on_detection_entered(body):
 	if body is Player:
 		player = body
@@ -190,33 +186,18 @@ func die():
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world.tscn":
-		GameState.Kill += 2
-		GameState.Coin += 4
-		GameState.Crystal += 2
-	elif scene == "res://SCENE/workd/world2.tscn":
-		GameState.Kill += 3
-		GameState.Coin += 6
-		GameState.Crystal += 3
-	elif scene == "res://SCENE/workd/world3.tscn":
-		GameState.Kill += 4
-		GameState.Coin += 8
-		GameState.Crystal += 4
-	elif scene == "res://SCENE/workd/world4.tscn":
-		GameState.Kill += 5
-		GameState.Coin += 10
-		GameState.Crystal += 5
-	if scene == "res://SCENE/workd/world4.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed = true
-		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	elif scene == "res://SCENE/workd/world5.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed2 = true
-		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	elif scene == "res://SCENE/workd/world6.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed3 = true
+	if scene == "res://SCENE/workd/world7.tscn":
+		GameState.Coin += 25
+		GameState.Kill += 10
+		GameState.Crystal+=10
+	elif scene == "res://SCENE/workd/world8.tscn":
+		GameState.Coin += 35
+		GameState.Kill += 13
+		GameState.Crystal+=15
+	if scene == "res://SCENE/workd/world7.tscn":
+		await get_tree().create_timer(0.5).timeout
+		GameState.dwarf_killed = true
 		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
 	else:
 		queue_free()
+		

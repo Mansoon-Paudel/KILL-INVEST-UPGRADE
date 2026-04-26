@@ -24,6 +24,7 @@ var Snake_killed2: bool = false
 var ORC_killed: bool = false
 var ORC_killed2: bool = false
 var ORC_killed3: bool = false
+var dwarf_killed: bool = false
 const TIER_SPRITES = [
 	preload("res://SCENE/Player/Tier_1.tres"),
 	preload("res://SCENE/Player/Tier_2.tres"),
