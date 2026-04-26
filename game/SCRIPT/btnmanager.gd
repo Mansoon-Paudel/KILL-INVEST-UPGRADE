@@ -23,8 +23,7 @@ func _on_button_4_button_up() -> void:
 
 func _on_button_pressed() -> void:
 	reset_and_go("res://SCENE/Skill-tree.tscn")
-
 func reset_and_go(scene: String) -> void:
 	GameState.player_dead = false
-	GameState.health = GameState.get_stat("health") 
+	GameState.health = GameState.max_health  
 	get_tree().change_scene_to_file(scene)

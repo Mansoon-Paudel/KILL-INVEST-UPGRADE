@@ -10,9 +10,9 @@ enum State {
 
 @export var speed: float = 75
 @export var gravity: float = 900
-@export var health = 10
-@export var knockback_force = 100
-@export var stun_duration = 0.5
+@export var health: float = 200
+@export var knockback_force: float = 100
+@export var stun_duration: float = 0.5
 @export var arena_left: float = 2550
 @export var arena_right: float = 3050
 
@@ -22,11 +22,11 @@ var can_attack = false
 var is_attacking = false
 var is_stunned = false
 var is_dying = false
-var damage = 2
-var knockback_velocity = Vector2.ZERO
-const ATTACK_DELAY: float = 0.5
-var attack_cooldown: float = 0.0
+var damage: float = 30
 var anger_played: bool = false
+
+const ATTACK_DELAY: float = 0.0
+var attack_cooldown: float = 0.0
 
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
@@ -40,43 +40,35 @@ func _ready() -> void:
 	attack_zone.body_entered.connect(_on_attack_zone_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world4.tscn":
-		health = 25
-		damage = 5.5
-	elif scene == "res://SCENE/workd/world5.tscn":
-		health = 35
-		damage = 6.5
-	elif scene == "res://SCENE/workd/world6.tscn":
-		health = 50
-		damage = 8.5
-
 func _on_detection_entered(body):
-	if body is Player and not anger_played:
+	if body is Player:
 		player = body
-		anger_played = true
-		set_physics_process(false)
-		sprite.play("Anger")
-		await sprite.animation_finished
-		set_physics_process(true)
-		current_state = State.CHASE
+		if not anger_played:
+			anger_played = true
+			set_physics_process(false)
+			sprite.play("Anger")
+			await sprite.animation_finished
+			set_physics_process(true)
+		if current_state == State.IDLE:
+			current_state = State.CHASE
 
 func _on_detection_exited(body):
 	if body is Player:
 		player = null
-		current_state = State.IDLE
+		if not is_stunned:
+			current_state = State.IDLE
 
 func _on_attack_zone_entered(body):
 	if body is Player:
 		can_attack = true
-		if not is_stunned and not is_attacking and current_state == State.CHASE:
+		if current_state == State.CHASE:
 			current_state = State.ATTACK
 
 func _on_attack_zone_exited(body):
 	if body is Player:
-		if not is_stunned:
-			can_attack = false
-			if not is_attacking:
-				current_state = State.CHASE
+		can_attack = false
+		if current_state == State.ATTACK and not is_attacking:
+			current_state = State.CHASE
 
 func _physics_process(delta):
 	if attack_cooldown > 0:
@@ -135,16 +127,33 @@ func attack():
 		return
 	is_attacking = true
 	velocity.x = 0
-	sprite.play("attack")
-	await sprite.animation_finished
-	if attack_zone.overlaps_body(player) and player != null:
-		player.take_damage(damage)
-		can_attack = true
+	var roll = randf()
+	if roll < 0.15:
+		sprite.play("Magic_Fire")
+		await sprite.animation_finished
+		if attack_zone.overlaps_body(player) and player != null:
+			player.take_damage(int(damage) + 15)
+	elif roll < 0.30:
+		sprite.play("Magic_blade")
+		await sprite.animation_finished
+		if attack_zone.overlaps_body(player) and player != null:
+			player.take_damage(int(damage) + 20)
+	elif roll < 0.45:
+		sprite.play("Magic_lightning")
+		await sprite.animation_finished
+		if attack_zone.overlaps_body(player) and player != null:
+			player.take_damage(int(damage) + 25)
+	else:
+		sprite.play("attack")
+		await sprite.animation_finished
+		if attack_zone.overlaps_body(player) and player != null:
+			player.take_damage(int(damage))
 	is_attacking = false
 	attack_cooldown = ATTACK_DELAY
 	if player == null:
 		current_state = State.IDLE
 	elif attack_zone.overlaps_body(player):
+		can_attack = true
 		current_state = State.ATTACK
 	else:
 		can_attack = false
@@ -159,7 +168,6 @@ func take_damage(amount):
 	else:
 		if player != null:
 			stun(player.global_position)
-
 func stun(from_position: Vector2):
 	if is_stunned:
 		return
@@ -167,13 +175,15 @@ func stun(from_position: Vector2):
 	is_attacking = false
 	current_state = State.STUN
 	var direction = (global_position - from_position).normalized()
-	velocity = direction * knockback_force
+	if direction == Vector2.ZERO:
+		direction = Vector2.LEFT
+	velocity.x = direction.x * knockback_force
 	sprite.play("hurt")
 	await get_tree().create_timer(0.35).timeout
 	get_tree().paused = true
 	await get_tree().create_timer(0.12).timeout
 	get_tree().paused = false
-	await get_tree().create_timer(stun_duration).timeout
+	await sprite.animation_finished
 	is_stunned = false
 	if player == null:
 		current_state = State.IDLE
@@ -191,33 +201,5 @@ func die():
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
-	if scene == "res://SCENE/workd/world.tscn":
-		GameState.Kill += 2
-		GameState.Coin += 4
-		GameState.Crystal += 2
-	elif scene == "res://SCENE/workd/world2.tscn":
-		GameState.Kill += 3
-		GameState.Coin += 6
-		GameState.Crystal += 3
-	elif scene == "res://SCENE/workd/world3.tscn":
-		GameState.Kill += 4
-		GameState.Coin += 8
-		GameState.Crystal += 4
-	elif scene == "res://SCENE/workd/world4.tscn":
-		GameState.Kill += 5
-		GameState.Coin += 10
-		GameState.Crystal += 5
-	if scene == "res://SCENE/workd/world4.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed = true
-		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	elif scene == "res://SCENE/workd/world5.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed2 = true
-		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	elif scene == "res://SCENE/workd/world6.tscn":
-		await get_tree().create_timer(1.5).timeout
-		GameState.ORC_killed3 = true
-		get_tree().change_scene_to_file("res://SCENE/levels.tscn")
-	else:
-		queue_free()
+	
+	queue_free()

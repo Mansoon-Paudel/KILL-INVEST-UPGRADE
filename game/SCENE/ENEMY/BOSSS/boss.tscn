@@ -14,22 +14,36 @@
 [ext_resource type="Texture2D" uid="uid://cbhvilc1bgbh6" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Attack2.png" id="9_qr8q8"]
 [ext_resource type="Texture2D" uid="uid://datpevo1kyuwt" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Attack3.png" id="10_d2flh"]
 [ext_resource type="Texture2D" uid="uid://ddvtgd40qx152" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Attack4.png" id="11_i1g08"]
+[ext_resource type="Texture2D" uid="uid://cakv0eoth16h2" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_fire1.png" id="11_kwq58"]
+[ext_resource type="Texture2D" uid="uid://dfsofiqlxlp68" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_blade1.png" id="11_qr8q8"]
+[ext_resource type="Texture2D" uid="uid://bcqgl1122a7l5" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_fire2.png" id="12_4a1ao"]
+[ext_resource type="Texture2D" uid="uid://d3et8j64cani8" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_blade3.png" id="12_d2flh"]
 [ext_resource type="Texture2D" uid="uid://0y85ogsd0ivd" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Attack5.png" id="12_llav7"]
+[ext_resource type="Texture2D" uid="uid://bgegffunsrj61" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_blade4.png" id="13_i1g08"]
+[ext_resource type="Texture2D" uid="uid://ctsm4jto2u20c" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_fire3.png" id="13_k2v65"]
 [ext_resource type="Texture2D" uid="uid://cfi4ig1eatmu6" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Attack6.png" id="13_t0ps5"]
+[ext_resource type="Texture2D" uid="uid://deo8ulfngynu4" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_fire4.png" id="14_4qyos"]
 [ext_resource type="Texture2D" uid="uid://b31lbjyyapln2" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Hurt1.png" id="14_440j0"]
+[ext_resource type="Texture2D" uid="uid://b4egphgqnh0gg" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_blade5.png" id="14_llav7"]
 [ext_resource type="Texture2D" uid="uid://b2v48nyhxwar3" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Hurt2.png" id="15_331wj"]
+[ext_resource type="Texture2D" uid="uid://cyihyvpcej5qj" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_fire5.png" id="15_562vq"]
 [ext_resource type="Texture2D" uid="uid://b5gjbeicnmh8b" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Idle1.png" id="16_2g6xg"]
 [ext_resource type="Texture2D" uid="uid://dp6eo748q35pe" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Idle2.png" id="17_qfuwi"]
 [ext_resource type="Texture2D" uid="uid://dhevgc7xghefw" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Idle3.png" id="18_yyc4a"]
 [ext_resource type="Texture2D" uid="uid://6hoegoj5wx1l" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk1.png" id="19_kwq58"]
 [ext_resource type="Texture2D" uid="uid://d0vj66qol78ap" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk3.png" id="20_4a1ao"]
+[ext_resource type="Texture2D" uid="uid://fx16wgrwoisy" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_lightning1.png" id="20_b32d6"]
+[ext_resource type="Texture2D" uid="uid://btuhxjlbifrju" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_lightning3.png" id="21_baxat"]
 [ext_resource type="Texture2D" uid="uid://bujadcvet7ool" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk2.png" id="21_k2v65"]
 [ext_resource type="Texture2D" uid="uid://bokiyjooldo1k" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk4.png" id="22_4qyos"]
+[ext_resource type="Texture2D" uid="uid://odvc5l1esak2" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_lightning2.png" id="22_t5who"]
 [ext_resource type="Texture2D" uid="uid://drwmhvbfu1h5c" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk5.png" id="23_562vq"]
 [ext_resource type="PackedScene" uid="uid://q04bymqypnpp" path="res://SCENE/hitbox.tscn" id="23_ef7ae"]
+[ext_resource type="Texture2D" uid="uid://bcqso0rcvteb1" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_lightning4.png" id="23_qoae7"]
+[ext_resource type="Texture2D" uid="uid://dbtdpm583s0wl" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Magic_lightning5.png" id="24_14ruf"]
 [ext_resource type="Texture2D" uid="uid://cfk3ujp0w4402" path="res://ASSETS/Enemy/bosses/PNG/Boss1/Walk6.png" id="24_b32d6"]
 [ext_resource type="Script" uid="uid://d123pjmhm2vg3" path="res://SCRIPT/Enemy/attack_zone.gd" id="24_idjbv"]
-[ext_resource type="Script" uid="uid://d1ioh0u1dtdyx" path="res://SCRIPT/Enemy/detection_zone.gd" id="25_b5wom"]
+[ext_resource type="Script" uid="uid://d1ioh0u1dtdyx" path="res://SCRIPT/Enemy/detection_zone.gd" id="44_kwq58"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_baxat"]
 animations = [{
@@ -69,6 +83,72 @@ animations = [{
 "loop": false,
 "name": &"Die",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.2,
+"texture": ExtResource("11_kwq58")
+}, {
+"duration": 0.8,
+"texture": ExtResource("12_4a1ao")
+}, {
+"duration": 1.5,
+"texture": ExtResource("13_k2v65")
+}, {
+"duration": 1.5,
+"texture": ExtResource("14_4qyos")
+}, {
+"duration": 1.5,
+"texture": ExtResource("13_k2v65")
+}, {
+"duration": 0.8,
+"texture": ExtResource("15_562vq")
+}],
+"loop": false,
+"name": &"Magic_Fire",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("11_qr8q8")
+}, {
+"duration": 1.5,
+"texture": ExtResource("12_d2flh")
+}, {
+"duration": 1.2,
+"texture": ExtResource("13_i1g08")
+}, {
+"duration": 0.5,
+"texture": ExtResource("14_llav7")
+}],
+"loop": false,
+"name": &"Magic_blade",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.3,
+"texture": ExtResource("20_b32d6")
+}, {
+"duration": 0.8,
+"texture": ExtResource("21_baxat")
+}, {
+"duration": 0.8,
+"texture": ExtResource("22_t5who")
+}, {
+"duration": 0.8,
+"texture": ExtResource("23_qoae7")
+}, {
+"duration": 0.8,
+"texture": ExtResource("22_t5who")
+}, {
+"duration": 0.8,
+"texture": ExtResource("23_qoae7")
+}, {
+"duration": 1.3,
+"texture": ExtResource("24_14ruf")
+}],
+"loop": false,
+"name": &"Magic_lightning",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -152,22 +232,21 @@ height = 165.99203
 [sub_resource type="CircleShape2D" id="CircleShape2D_atvc4"]
 radius = 87.57283
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hqkdf"]
-radius = 397.98618
+[sub_resource type="CircleShape2D" id="CircleShape2D_4a1ao"]
+radius = 716.58704
 
 [node name="BOSS1" type="CharacterBody2D" unique_id=885736534]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_4qo8a")
-health = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1064870114]
 texture_filter = 1
 position = Vector2(-171, -206.00002)
 scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_baxat")
-animation = &"Anger"
-frame = 2
+animation = &"Magic_lightning"
+frame = 6
 frame_progress = 1.0
 centered = false
 flip_h = true
@@ -197,20 +276,22 @@ shape = SubResource("CapsuleShape2D_lmpi2")
 [node name="Attackzone" type="Area2D" parent="." unique_id=290527920]
 visible = false
 position = Vector2(-431, 106)
+collision_layer = 0
 script = ExtResource("24_idjbv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
 position = Vector2(440, -151)
 shape = SubResource("CircleShape2D_atvc4")
 
-[node name="DetectionZone" type="Area2D" parent="." unique_id=526359210]
+[node name="DetectionZone" type="Area2D" parent="." unique_id=650423700]
 visible = false
 position = Vector2(-431, 106)
-script = ExtResource("25_b5wom")
+collision_layer = 0
+script = ExtResource("44_kwq58")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1335372084]
-position = Vector2(422, -109)
-shape = SubResource("CircleShape2D_hqkdf")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1157558553]
+position = Vector2(431, -106)
+shape = SubResource("CircleShape2D_4a1ao")
 
 [node name="FloorCheck" type="RayCast2D" parent="." unique_id=1643236375]
 position = Vector2(-14, -3)
@@ -221,7 +302,11 @@ position = Vector2(-55, -1)
 target_position = Vector2(30, 50)
 
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="Attackzone" to="." method="_on_attack_zone_entered"]
 [connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]
+[connection signal="body_exited" from="Attackzone" to="." method="_on_attack_zone_exited"]
 [connection signal="body_exited" from="Attackzone" to="Attackzone" method="_on_body_exited"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_entered"]
 [connection signal="body_entered" from="DetectionZone" to="DetectionZone" method="_on_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_exited"]
 [connection signal="body_exited" from="DetectionZone" to="DetectionZone" method="_on_body_exited"]

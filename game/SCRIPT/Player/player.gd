@@ -45,6 +45,7 @@ func _ready() -> void:
 	player.position = GameState.player_position
 	player_attack.monitoring = false
 	player_attack.monitorable = false
+	health = GameState.health
 	death.hide()
 	apply_upgrades()
 func apply_upgrades() -> void:
@@ -70,8 +71,6 @@ func _physics_process(delta: float) -> void:
 			current_dashes += 1
 			if current_dashes < GameState.dashNum:
 				dash_refresh_timer = GameState.dash_cooldown
-
-	# Dash tick
 	if dashing:
 		dash_timer -= delta
 		if dash_timer <= 0.0:
@@ -142,11 +141,14 @@ func Start_attack() -> void:
 	await sprite2D.animation_finished
 	is_attacking = false
 
-func take_damage(amount: int) -> void:
+func take_damage(amount) -> void: 
 	if is_invincible or is_dead:
 		return
-	health -= amount
-	GameState.health = health
+	print(str(health)+"before")
+	print(amount)
+	health -= int(amount)
+	GameState.health = health 
+	print(str(health)+"after")
 	if health <= 0:
 		die()
 		return
