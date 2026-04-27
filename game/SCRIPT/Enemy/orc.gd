@@ -13,8 +13,6 @@ enum State {
 @export var health: float = 25
 @export var knockback_force: float = 100
 @export var stun_duration: float = 0.5
-@export var arena_left: float = 2550
-@export var arena_right: float = 3050
 
 var current_state = State.IDLE
 var player = null
@@ -23,22 +21,32 @@ var is_attacking = false
 var is_stunned = false
 var is_dying = false
 var damage: float = 5.5
-var anger_played: bool = false
 
-const ATTACK_DELAY: float = 0.8
+const ATTACK_DELAY: float = 0.0
 var attack_cooldown: float = 0.0
-
-@onready var lft: CollisionShape2D = $CollisionShape2D_left
-@onready var rgt: CollisionShape2D = $CollisionShape2D_right
+@onready var hitbox: Area2D = $Hitbox
+@onready var hitbox_lft: CollisionShape2D = $Hitbox/CollisionShape2D_left
+@onready var hitbox_rgt: CollisionShape2D = $Hitbox/CollisionShape2D_right
+@onready var body_lft: CollisionShape2D = $CollisionShape2D_left
+@onready var body_rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_zone: Area2D = $Attackzone
+@onready var attack_lft: CollisionShape2D = $Attackzone/CollisionShape2D_left
+@onready var attack_rgt: CollisionShape2D = $Attackzone/CollisionShape2D_right
 @onready var detection: Area2D = $DetectionZone
+@onready var floor_check_lft: RayCast2D = $FloorCheck
+@onready var floor_check_rgt: RayCast2D = $FloorCheck2
 
 func _ready() -> void:
 	detection.body_entered.connect(_on_detection_entered)
 	detection.body_exited.connect(_on_detection_exited)
 	attack_zone.body_entered.connect(_on_attack_zone_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
+	hitbox.area_entered.connect(_on_hitbox_area_entered)  
+	attack_lft.disabled = true
+	attack_rgt.disabled = true
+	hitbox_rgt.disabled = false 
+	hitbox_lft.disabled = true
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world4.tscn":
 		health = 25
@@ -49,16 +57,12 @@ func _ready() -> void:
 	elif scene == "res://SCENE/workd/world6.tscn":
 		health = 50
 		damage = 8.5
-
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.has_method("TakeDamage"):
+		take_damage(area.damage)
 func _on_detection_entered(body):
 	if body is Player:
 		player = body
-		if not anger_played:
-			anger_played = true
-			set_physics_process(false)
-			sprite.play("Anger")
-			await sprite.animation_finished
-			set_physics_process(true)
 		if current_state == State.IDLE:
 			current_state = State.CHASE
 
@@ -118,52 +122,44 @@ func chase_player():
 		current_state = State.IDLE
 		return
 	var direction = sign(player.global_position.x - global_position.x)
-	if (global_position.x <= arena_left and direction < 0) or \
-	   (global_position.x >= arena_right and direction > 0):
+	var can_move = false
+	if direction < 0:
+		can_move = floor_check_lft.is_colliding()
+	else:
+		can_move = floor_check_rgt.is_colliding()
+	if not can_move:
 		velocity.x = 0
 		return
 	velocity.x = direction * speed
+	# Update facing and enable correct attack shape
 	if direction < 0:
 		sprite.flip_h = true
-		rgt.disabled = true
-		lft.disabled = false
+		body_rgt.disabled = true
+		body_lft.disabled = false
+		attack_rgt.disabled = true
+		attack_lft.disabled = false
+		hitbox_rgt.disabled = true   # ADD
+		hitbox_lft.disabled = false  # ADD
 	else:
 		sprite.flip_h = false
-		lft.disabled = true
-		rgt.disabled = false
+		body_lft.disabled = true
+		body_rgt.disabled = false
+		attack_lft.disabled = true
+		attack_rgt.disabled = false
+		hitbox_lft.disabled = true   # ADD
+		hitbox_rgt.disabled = false  # ADD
 
 func attack():
 	if is_attacking or attack_cooldown > 0:
 		return
 	is_attacking = true
 	velocity.x = 0
-
-	# 40% chance of magic attack, 60% normal
-	var roll = randf()
-	if roll < 0.15:
-		sprite.play("Magic_Fire")
-		await sprite.animation_finished
-		if attack_zone.overlaps_body(player) and player != null:
-			player.take_damage(int(damage) + 3)
-	elif roll < 0.30:
-		sprite.play("Magic_blade")
-		await sprite.animation_finished
-		if attack_zone.overlaps_body(player) and player != null:
-			player.take_damage(int(damage) + 5)
-	elif roll < 0.45:
-		sprite.play("Magic_lightning")
-		await sprite.animation_finished
-		if attack_zone.overlaps_body(player) and player != null:
-			player.take_damage(int(damage) + 7)
-	else:
-		sprite.play("attack")
-		await sprite.animation_finished
-		if attack_zone.overlaps_body(player) and player != null:
-			player.take_damage(int(damage))
-
+	sprite.play("attack")
+	await sprite.animation_finished
+	if attack_zone.overlaps_body(player) and player != null:
+		player.take_damage(int(damage))
 	is_attacking = false
 	attack_cooldown = ATTACK_DELAY
-
 	if player == null:
 		current_state = State.IDLE
 	elif attack_zone.overlaps_body(player):

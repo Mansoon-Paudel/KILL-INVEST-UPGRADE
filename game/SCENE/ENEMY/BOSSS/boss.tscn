@@ -226,8 +226,8 @@ animations = [{
 size = Vector2(85.625, 98.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lmpi2"]
-radius = 82.98624
-height = 165.99203
+radius = 70.00644
+height = 157.97285
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atvc4"]
 radius = 87.57283
@@ -252,11 +252,13 @@ centered = false
 flip_h = true
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
+visible = false
 position = Vector2(-74, -50)
 shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
+visible = false
 position = Vector2(1.8125, -50)
 shape = SubResource("RectangleShape2D_otmlh")
 
@@ -266,21 +268,26 @@ position = Vector2(-12, 0)
 collision_layer = 1
 collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
-position = Vector2(19.999998, -47)
+[node name="CollisionShape2D_left" type="CollisionShape2D" parent="Hitbox" unique_id=280545943]
+position = Vector2(8, -52)
 rotation = 1.5610062
 shape = SubResource("CapsuleShape2D_lmpi2")
+
+[node name="CollisionShape2D_right" type="CollisionShape2D" parent="Hitbox" unique_id=418562485]
+position = Vector2(-57, -50)
+rotation = 1.5610062
+shape = SubResource("CapsuleShape2D_lmpi2")
+disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1578546152]
 
 [node name="Attackzone" type="Area2D" parent="." unique_id=290527920]
-visible = false
 position = Vector2(-431, 106)
 collision_layer = 0
 script = ExtResource("24_idjbv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
-position = Vector2(440, -151)
+[node name="CollisionShape2D_left" type="CollisionShape2D" parent="Attackzone" unique_id=1197730915]
+position = Vector2(395, -165)
 shape = SubResource("CircleShape2D_atvc4")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=650423700]

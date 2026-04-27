@@ -25,9 +25,11 @@ var is_dying = false
 var damage: float = 30
 var anger_played: bool = false
 
-const ATTACK_DELAY: float = 0.0
+const ATTACK_DELAY: float = 0.125
 var attack_cooldown: float = 0.0
-
+@onready var hitbox: Area2D = $Hitbox
+@onready var hitbox_lft: CollisionShape2D = $Hitbox/CollisionShape2D_left
+@onready var hitbox_rgt: CollisionShape2D = $Hitbox/CollisionShape2D_right
 @onready var lft: CollisionShape2D = $CollisionShape2D_left
 @onready var rgt: CollisionShape2D = $CollisionShape2D_right
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -40,6 +42,9 @@ func _ready() -> void:
 	attack_zone.body_entered.connect(_on_attack_zone_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
+	hitbox.area_entered.connect(_on_hitbox_area_entered)
+	hitbox_lft.disabled = true
+	hitbox_rgt.disabled = false 
 func _on_detection_entered(body):
 	if body is Player:
 		player = body
@@ -51,7 +56,9 @@ func _on_detection_entered(body):
 			set_physics_process(true)
 		if current_state == State.IDLE:
 			current_state = State.CHASE
-
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		take_damage(GameState.damage)
 func _on_detection_exited(body):
 	if body is Player:
 		player = null
@@ -117,10 +124,14 @@ func chase_player():
 		sprite.flip_h = true
 		rgt.disabled = true
 		lft.disabled = false
+		hitbox_rgt.disabled = true
+		hitbox_lft.disabled = false
 	else:
 		sprite.flip_h = false
 		lft.disabled = true
 		rgt.disabled = false
+		hitbox_lft.disabled = true
+		hitbox_rgt.disabled = false
 
 func attack():
 	if is_attacking or attack_cooldown > 0:
@@ -162,7 +173,10 @@ func attack():
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
+	print(health)
+	print(amount)
 	health -= amount
+	print(health)
 	if health <= 0:
 		current_state = State.DEAD
 	else:
