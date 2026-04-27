@@ -70,7 +70,6 @@ func _on_attack_zone_entered(body):
 
 func _on_attack_zone_exited(body):
 	if body is Player:
-		# Don't change can_attack during stun — knockback causes false exits
 		if not is_stunned:
 			can_attack = false
 			if not is_attacking:
@@ -98,7 +97,6 @@ func state_machine(delta):
 				sprite.play("idle")
 			else:
 				sprite.play("walk")
-			# Check attack zone overlap directly instead of relying on signal
 			if attack_zone.overlaps_body(player) and player != null:
 				can_attack = true
 				current_state = State.ATTACK
@@ -140,13 +138,11 @@ func attack():
 	velocity.x = 0
 	sprite.play("attack")
 	await sprite.animation_finished
-	# Re-check overlap directly — don't trust can_attack flag
 	if attack_zone.overlaps_body(player) and player != null:
 		player.take_damage(damage)
 		can_attack = true
 	is_attacking = false
 	attack_cooldown = ATTACK_DELAY
-	# Re-check state after attack
 	if player == null:
 		current_state = State.IDLE
 	elif attack_zone.overlaps_body(player):
@@ -169,7 +165,7 @@ func stun(from_position: Vector2):
 	if is_stunned:
 		return
 	is_stunned = true
-	is_attacking = false  # cancel any ongoing attack
+	is_attacking = false 
 	current_state = State.STUN
 	var direction = (global_position - from_position).normalized()
 	velocity = direction * knockback_force
@@ -180,7 +176,6 @@ func stun(from_position: Vector2):
 	get_tree().paused = false
 	await get_tree().create_timer(stun_duration).timeout
 	is_stunned = false
-	# After stun, check where player is using overlap directly
 	if player == null:
 		current_state = State.IDLE
 	elif attack_zone.overlaps_body(player):
