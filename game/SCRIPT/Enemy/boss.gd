@@ -24,7 +24,7 @@ var is_stunned = false
 var is_dying = false
 var damage: float = 30
 var anger_played: bool = false
-
+var hit_cooldown: bool = false
 const ATTACK_DELAY: float = 0.125
 var attack_cooldown: float = 0.0
 @onready var hitbox: Area2D = $Hitbox
@@ -37,46 +37,9 @@ var attack_cooldown: float = 0.0
 @onready var detection: Area2D = $DetectionZone
 
 func _ready() -> void:
-	detection.body_entered.connect(_on_detection_entered)
-	detection.body_exited.connect(_on_detection_exited)
-	attack_zone.body_entered.connect(_on_attack_zone_entered)
-	attack_zone.body_exited.connect(_on_attack_zone_exited)
-	var scene = get_tree().current_scene.scene_file_path
-	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	hitbox_lft.disabled = true
-	hitbox_rgt.disabled = false 
-func _on_detection_entered(body):
-	if body is Player:
-		player = body
-		if not anger_played:
-			anger_played = true
-			set_physics_process(false)
-			sprite.play("Anger")
-			await sprite.animation_finished
-			set_physics_process(true)
-		if current_state == State.IDLE:
-			current_state = State.CHASE
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player:
-		take_damage(GameState.damage)
-func _on_detection_exited(body):
-	if body is Player:
-		player = null
-		if not is_stunned:
-			current_state = State.IDLE
-
-func _on_attack_zone_entered(body):
-	if body is Player:
-		can_attack = true
-		if current_state == State.CHASE:
-			current_state = State.ATTACK
-
-func _on_attack_zone_exited(body):
-	if body is Player:
-		can_attack = false
-		if current_state == State.ATTACK and not is_attacking:
-			current_state = State.CHASE
-
+	hitbox_rgt.disabled = false
+	var scene = get_tree().current_scene.scene_file_path
 func _physics_process(delta):
 	if attack_cooldown > 0:
 		attack_cooldown -= delta
@@ -173,10 +136,7 @@ func attack():
 func take_damage(amount):
 	if current_state == State.DEAD:
 		return
-	print(health)
-	print(amount)
 	health -= amount
-	print(health)
 	if health <= 0:
 		current_state = State.DEAD
 	else:
@@ -193,10 +153,6 @@ func stun(from_position: Vector2):
 		direction = Vector2.LEFT
 	velocity.x = direction.x * knockback_force
 	sprite.play("hurt")
-	await get_tree().create_timer(0.35).timeout
-	get_tree().paused = true
-	await get_tree().create_timer(0.12).timeout
-	get_tree().paused = false
 	await sprite.animation_finished
 	is_stunned = false
 	if player == null:
@@ -206,7 +162,6 @@ func stun(from_position: Vector2):
 		current_state = State.ATTACK
 	else:
 		current_state = State.CHASE
-
 func die():
 	if is_dying:
 		return
@@ -215,5 +170,4 @@ func die():
 	set_physics_process(false)
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
-	
 	queue_free()

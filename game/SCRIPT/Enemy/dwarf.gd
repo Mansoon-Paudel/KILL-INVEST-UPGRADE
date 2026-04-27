@@ -40,14 +40,14 @@ func _ready() -> void:
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world7.tscn":
-		health = 70
-		damage = 12
+		health = 80
+		damage = 13
 	elif scene == "res://SCENE/workd/world8.tscn":
-		health = 90
-		damage = 15
-	elif scene == "res://SCENE/workd/world9.tscn":
 		health = 110
-		damage = 18
+		damage = 16
+	elif scene == "res://SCENE/workd/world9.tscn":
+		health = 140
+		damage = 20
 func _on_detection_entered(body):
 	if body is Player:
 		player = body

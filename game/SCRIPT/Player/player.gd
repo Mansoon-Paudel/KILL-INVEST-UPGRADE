@@ -144,11 +144,8 @@ func Start_attack() -> void:
 func take_damage(amount) -> void: 
 	if is_invincible or is_dead:
 		return
-	print(str(health)+"before")
-	print(amount)
 	health -= int(amount)
 	GameState.health = health 
-	print(str(health)+"after")
 	if health <= 0:
 		die()
 		return

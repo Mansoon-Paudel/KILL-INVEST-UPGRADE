@@ -46,8 +46,8 @@ func _ready() -> void:
 		health = 5
 		damage = 1.5
 	elif scene == "res://SCENE/workd/world3.tscn":  
-		health = 7
-		damage = 2.5
+		health = 10
+		damage = 3
 
 func _on_detection_entered(body):
 	if body is Player:

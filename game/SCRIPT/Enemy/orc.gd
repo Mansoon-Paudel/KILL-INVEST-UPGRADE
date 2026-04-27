@@ -38,11 +38,6 @@ var attack_cooldown: float = 0.0
 @onready var floor_check_rgt: RayCast2D = $FloorCheck2
 
 func _ready() -> void:
-	detection.body_entered.connect(_on_detection_entered)
-	detection.body_exited.connect(_on_detection_exited)
-	attack_zone.body_entered.connect(_on_attack_zone_entered)
-	attack_zone.body_exited.connect(_on_attack_zone_exited)
-	hitbox.area_entered.connect(_on_hitbox_area_entered)  
 	attack_lft.disabled = true
 	attack_rgt.disabled = true
 	hitbox_rgt.disabled = false 
@@ -52,49 +47,20 @@ func _ready() -> void:
 		health = 25
 		damage = 5.5
 	elif scene == "res://SCENE/workd/world5.tscn":
-		health = 35
+		health = 40
 		damage = 6.5
 	elif scene == "res://SCENE/workd/world6.tscn":
-		health = 50
-		damage = 8.5
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.has_method("TakeDamage"):
-		take_damage(area.damage)
-func _on_detection_entered(body):
-	if body is Player:
-		player = body
-		if current_state == State.IDLE:
-			current_state = State.CHASE
-
-func _on_detection_exited(body):
-	if body is Player:
-		player = null
-		if not is_stunned:
-			current_state = State.IDLE
-
-func _on_attack_zone_entered(body):
-	if body is Player:
-		can_attack = true
-		if current_state == State.CHASE:
-			current_state = State.ATTACK
-
-func _on_attack_zone_exited(body):
-	if body is Player:
-		can_attack = false
-		if current_state == State.ATTACK and not is_attacking:
-			current_state = State.CHASE
-
+		health = 60
+		damage = 9
 func _physics_process(delta):
 	if attack_cooldown > 0:
 		attack_cooldown -= delta
 	apply_gravity(delta)
 	state_machine(delta)
 	move_and_slide()
-
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
 func state_machine(delta):
 	match current_state:
 		State.IDLE:
@@ -116,7 +82,6 @@ func state_machine(delta):
 			sprite.play("hurt")
 		State.DEAD:
 			die()
-
 func chase_player():
 	if player == null:
 		current_state = State.IDLE
@@ -131,7 +96,6 @@ func chase_player():
 		velocity.x = 0
 		return
 	velocity.x = direction * speed
-	# Update facing and enable correct attack shape
 	if direction < 0:
 		sprite.flip_h = true
 		body_rgt.disabled = true
@@ -173,6 +137,7 @@ func take_damage(amount):
 	if current_state == State.DEAD:
 		return
 	health -= amount
+	print(health)
 	if health <= 0:
 		current_state = State.DEAD
 	else:
@@ -210,6 +175,8 @@ func die():
 	is_dying = true
 	sprite.play("Die")
 	set_physics_process(false)
+	body_lft.disabled=true
+	body_rgt.disabled=true
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world4.tscn":

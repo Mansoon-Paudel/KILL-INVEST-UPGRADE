@@ -34,10 +34,6 @@ const ATTACK_DELAY: float = 0.5
 @onready var floor_check_lft: RayCast2D = $FloorCheck
 
 func _ready() -> void:
-	detection.body_entered.connect(_on_detection_entered)
-	detection.body_exited.connect(_on_detection_exited)
-	attack_zone.body_entered.connect(_on_attack_zone_entered)
-	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world.tscn":
 		health = 7
@@ -46,37 +42,14 @@ func _ready() -> void:
 		health = 10
 		damage = 3
 	elif scene == "res://SCENE/workd/world3.tscn":
-		health = 14
-		damage = 4
+		health = 20
+		damage = 5
 	elif scene == "res://SCENE/workd/world4.tscn":
-		health = 9
-		damage = 3
+		health = 20
+		damage = 5
 	elif scene == "res://SCENE/workd/world5.tscn":
-		health = 15
-		damage = 4
-
-func _on_detection_entered(body):
-	if body is Player:
-		player = body
-		if current_state == State.IDLE:
-			current_state = State.CHASE
-func _on_detection_exited(body):
-	if body is Player:
-		player = null
-		current_state = State.IDLE
-
-func _on_attack_zone_entered(body):
-	if body is Player:
-		can_attack = true
-		if not is_stunned and not is_attacking:
-			current_state = State.ATTACK
-
-func _on_attack_zone_exited(body):
-	if body is Player:
-		if not is_stunned:
-			can_attack = false
-			if not is_attacking:
-				current_state = State.CHASE
+		health = 30
+		damage = 7
 
 func _physics_process(delta):
 	if attack_cooldown > 0:
@@ -193,6 +166,8 @@ func die():
 	is_dying = true
 	sprite.play("Die")
 	set_physics_process(false)
+	lft.disabled = true
+	rgt.disabled = true
 	await get_tree().create_timer(1).timeout
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world.tscn":

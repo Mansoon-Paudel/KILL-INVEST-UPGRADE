@@ -1,17 +1,17 @@
 class_name manager extends Node
-var speed = 170
+var speed = 250
 var player: Player
-var health = 300
-var max_health = 300
+var health = 4
+var max_health = 4
 var dashNum = 0
 var jumpNum = 2
 var dash_cooldown: float = 2
-var Coin = 300
-var Crystal = 300
+var Coin = 30
+var Crystal = 15
 var enemy_kill_count = 0
 var enemy_damage = 1
-var damage = 1
-var Kill = 300
+var damage = 5
+var Kill = 10
 var player_position = Vector2(558.0, 419.0)
 var current_zone = "zone_1"
 var current_tilemap_bounds: Array[Vector2]

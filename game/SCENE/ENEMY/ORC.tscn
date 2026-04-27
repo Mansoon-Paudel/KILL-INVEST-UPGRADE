@@ -145,14 +145,12 @@ frame_progress = 0.6385409
 flip_h = true
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
-visible = false
-position = Vector2(-60, -48.969696)
+position = Vector2(-60, -65)
 shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
-visible = false
-position = Vector2(5.25, -48.219696)
+position = Vector2(5.25, -66)
 shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("20_jht13")]
@@ -161,11 +159,11 @@ collision_layer = 1
 collision_mask = 1
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="Hitbox" unique_id=105324497]
-position = Vector2(-8.6875, -59.1875)
+position = Vector2(-8.6875, -64)
 shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="Hitbox" unique_id=516532000]
-position = Vector2(-19, -59)
+position = Vector2(-19, -64)
 shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 

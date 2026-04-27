@@ -40,14 +40,17 @@ func _ready() -> void:
 	attack_zone.body_exited.connect(_on_attack_zone_exited)
 	var scene = get_tree().current_scene.scene_file_path
 	if scene == "res://SCENE/workd/world6.tscn":
-		health = 15
-		damage = 4
-	if scene == "res://SCENE/workd/world7.tscn":
-		health = 20
-		damage = 5
-	if scene == "res://SCENE/workd/world8.tscn":
-		health = 25
+		health = 45
 		damage = 7
+	if scene == "res://SCENE/workd/world7.tscn":
+		health = 65
+		damage = 9
+	if scene == "res://SCENE/workd/world8.tscn":
+		health = 80
+		damage = 13
+	if scene == "res://SCENE/workd/world9.tscn":
+		health = 110
+		damage = 16
 func _on_detection_entered(body):
 	if body is Player:
 		player = body
@@ -218,6 +221,10 @@ func die():
 		GameState.Kill += 9
 		GameState.Coin += 18
 		GameState.Crystal += 8
+	elif scene == "res://SCENE/workd/world9.tscn":
+		GameState.Kill += 12
+		GameState.Coin += 22
+		GameState.Crystal += 10
 	if scene == "res://SCENE/workd/world.tscn":
 		await get_tree().create_timer(0.5).timeout
 		GameState.yeti_killed = true

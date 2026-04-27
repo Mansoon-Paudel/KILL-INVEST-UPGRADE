@@ -182,7 +182,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 3.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,25 +245,22 @@ texture_filter = 1
 position = Vector2(-171, -206.00002)
 scale = Vector2(1.0234375, 0.99242425)
 sprite_frames = SubResource("SpriteFrames_baxat")
-animation = &"Magic_lightning"
-frame = 6
+animation = &"hurt"
+frame = 1
 frame_progress = 1.0
 centered = false
 flip_h = true
 
 [node name="CollisionShape2D_right" type="CollisionShape2D" parent="." unique_id=638421002]
-visible = false
 position = Vector2(-74, -50)
 shape = SubResource("RectangleShape2D_otmlh")
 disabled = true
 
 [node name="CollisionShape2D_left" type="CollisionShape2D" parent="." unique_id=332661541]
-visible = false
 position = Vector2(1.8125, -50)
 shape = SubResource("RectangleShape2D_otmlh")
 
 [node name="Hitbox" parent="." unique_id=194441939 instance=ExtResource("23_ef7ae")]
-visible = false
 position = Vector2(-12, 0)
 collision_layer = 1
 collision_mask = 1
@@ -291,7 +288,6 @@ position = Vector2(395, -165)
 shape = SubResource("CircleShape2D_atvc4")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=650423700]
-visible = false
 position = Vector2(-431, 106)
 collision_layer = 0
 script = ExtResource("44_kwq58")
@@ -308,6 +304,7 @@ target_position = Vector2(-39, 50)
 position = Vector2(-55, -1)
 target_position = Vector2(30, 50)
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="Attackzone" to="." method="_on_attack_zone_entered"]
 [connection signal="body_entered" from="Attackzone" to="Attackzone" method="_on_body_entered"]
